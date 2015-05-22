@@ -1,0 +1,63 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:head>
+        <title>Productos</title>
+    </h:head>
+    <h:body>
+        Administracion de Personas
+        <h:form>                     
+            <p:panelGrid columns="2">
+                <p:outputLabel>Cedula</p:outputLabel>
+                <p:inputText id="tfCedula" required="true" value="#{personaBean.cedula}" />
+
+                <p:outputLabel>Ciudad</p:outputLabel>
+                <p:selectOneMenu value="#{personaBean.idCiudades}" id="cbxCiudad" style="width:75%">
+                    <f:selectItems value="#{personaBean.ciudades}" var="ciudad" itemValue="${ciudad.id}" itemLabel="${ciudad.descripcion}" />
+                </p:selectOneMenu>  
+
+                <p:outputLabel>Telefono</p:outputLabel>
+                <p:inputText id="tfTelefono" required="true" value="#{personaBean.telefono}" />
+
+                <p:outputLabel>Nombre</p:outputLabel>
+                <p:inputText id="tfNombre" required="true" value="#{personaBean.nombre}" />
+
+                <p:outputLabel>Apellido</p:outputLabel>
+                <p:inputText id="tfApellido" required="true" value="#{personaBean.apellido}" />
+
+                <p:outputLabel>Direccion</p:outputLabel>
+                <p:inputText id="tfDireccion" required="true" value="#{personaBean.direccion}" />
+
+                <p:outputLabel>EMail</p:outputLabel>
+                <p:inputText id="tfEMail" required="true" value="#{personaBean.email}" />
+                <br></br>
+
+            </p:panelGrid>
+            Administracion de Afiliados           
+                <p:panelGrid columns="2">
+                <p:outputLabel>Cedula Afiliado</p:outputLabel>
+                <p:inputText id="tfCedulaAfiliado" required="true" value="#{afiliadoBean.cedula}" />
+
+                <p:outputLabel>Nivel</p:outputLabel>
+                <p:selectOneMenu value="#{afiliadoBean.idNiveles}" id="cbxNivel" style="width:75%">
+                    <f:selectItems value="#{afiliadoBean.niveles}" var="niveles" itemValue="${niveles.id}" itemLabel="${niveles.descripcion}" />
+                </p:selectOneMenu>  
+                
+                <p:outputLabel>Afiliado</p:outputLabel>
+                <p:selectOneMenu value="#{afiliadoBean.idAfiliados}" id="cbxAfiliados" style="width:75%">
+                    <f:selectItems value="#{afiliadoBean.afiliados}" var="afiliados" itemValue="${afiliados.id}" itemLabel="${afiliados.direccion}" />
+                </p:selectOneMenu> 
+
+                <p:outputLabel>Fecha Afiliacion</p:outputLabel>
+                <p:inputText id="tfFechaAfiliacion" required="true" value="#{afiliadoBean.fechaAfiliacion}" />
+
+            </p:panelGrid>
+ 
+        </h:form> 
+    </h:body>
+</html>
