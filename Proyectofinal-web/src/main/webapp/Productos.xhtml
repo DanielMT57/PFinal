@@ -37,6 +37,7 @@
                 <p:inputText id="tfPrecioVenta"  value="#{productoBean.precioVenta}" />               
                    <p:outputLabel>descripcion</p:outputLabel>
                    <p:inputText id="tfdescripcion"  value="#{productoBean.descripcion}" />
+                   
                    <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
                    <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
                    <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
