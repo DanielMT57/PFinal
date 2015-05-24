@@ -35,7 +35,7 @@ public class Detallepedido implements Serializable {
     @JoinColumn(name = "productos_id", referencedColumnName = "id")
 	private Productos productos;
     @ManyToOne
-    @JoinColumn(name = "id", referencedColumnName = "Id")
+    @JoinColumn(name = "Pedidos_id", referencedColumnName = "Id")
 	private Pedidos pedidos;
 
     public Detallepedido() {
