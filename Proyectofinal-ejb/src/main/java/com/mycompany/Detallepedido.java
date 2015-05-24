@@ -18,6 +18,7 @@ import javax.persistence.JoinTable;
 /**
  *
  * @author german
+ * @author  Daniel Moncada Tabares
  */
 @Entity
 @Table(name = "Detallepedido")
