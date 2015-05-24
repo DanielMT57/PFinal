@@ -129,6 +129,16 @@ public class ProductoManagedBean implements Serializable {
 
     }
       
+      public void eliminarProducto() {
+
+        Productos p = productoEJB.buscar(id);
+
+        productoEJB.eliminar(p);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha eliminado correctamente el Producto "));
+         System.out.println("ha actualizado correctamente");
+        limpiar();
+    }
+      
       
       
     public int getId() {
