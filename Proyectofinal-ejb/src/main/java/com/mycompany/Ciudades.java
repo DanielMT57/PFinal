@@ -19,6 +19,7 @@ import javax.persistence.Table;
 /**
  *
  * @author german
+ * @author Daniel Moncada Tabares
  */
 
 @Entity
