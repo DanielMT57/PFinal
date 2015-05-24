@@ -226,11 +226,12 @@ public class ProductoManagedBean implements Serializable {
 
         this.setCategorias(null);
         this.setColores(null);
-        this.setDescripcion(null);
+        //this.setDescripcion(null);
         this.setId(0);
         this.setPrecioCompra(0);
         this.setPrecioVenta(0);
         this.setPeso(0);
+        this.setDescripcion("");
 
     }
 
