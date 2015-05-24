@@ -40,9 +40,10 @@
                    <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
                    <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
                    <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
-                   
+                   <p:commandButton value ="Eliminar" action ="#{productoBean.eliminarProducto()}" update="@form"/>
+                    
             </p:panelGrid>   
-        </h:form>
+        </h:form> 
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
 </html>
