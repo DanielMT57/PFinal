@@ -12,6 +12,7 @@
         Administracion de Bodega 
         <br />
         <h:form>
+                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panelGrid columns="2">
                 <p:outputLabel>Id</p:outputLabel>
                 <p:inputText id="tfId" required="true" value="#{bodegaBean.id}" />
@@ -22,11 +23,11 @@
                 </p:selectOneMenu>
 
                 <p:outputLabel>Direccion</p:outputLabel>
-                <p:inputText id="tfDireccion" required="true" value="#{bodegaBean.direccion}" />      
-                    <p:commandButton value="Insertar" action="#{bodegaBean.crearBodega()}" update="@form"/>
+                <p:inputText id="tfDireccion"  value="#{bodegaBean.direccion}" />      
+                <p:commandButton value="Insertar" action="#{bodegaBean.crearBodega()}" update="@form"/>
                 <p:commandButton value="Buscar" action="#{bodegaBean.buscarBodega()}" update="@form" />
                 <p:commandButton value="Actualizar" action="#{bodegaBean.actualizarBodega()}" update="@form" />
-                <p:commandButton value="Eliminar" action="#{bodegaBean.eliminarBodega}" update="@form" />
+                <p:commandButton value="Eliminar" action="#{bodegaBean.eliminarBodega()}" update="@form" />
             </p:panelGrid>
         </h:form>
     </h:body>
