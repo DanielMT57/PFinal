@@ -25,9 +25,9 @@ public class Bodegas implements Serializable {
     @Column(name = "id")
     private int id;
     @ManyToOne
-    @JoinColumn(name = "ciudadesId_id", referencedColumnName = "id")
+    @JoinColumn(name = "ciudades_id", referencedColumnName = "id")
 	private Ciudades ciudadesId;
-    @Column(name = "direccionId")
+    @Column(name = "direccion")
     private String direccion;
 
     public Bodegas() {
