@@ -55,7 +55,7 @@ public class Productos implements Serializable {
     @OneToMany(mappedBy = "productosId")
     private List<Areaspagina> areaspaginaProductos;
 
-    public int getId() {
+    public int getId() { 
         return id;
     }
 
