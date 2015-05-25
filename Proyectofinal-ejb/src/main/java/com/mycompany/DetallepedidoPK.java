@@ -23,6 +23,7 @@ public class DetallepedidoPK implements Serializable {
     private int productosId;
 
     public DetallepedidoPK() {
+        //comentarios
     }
 
     public DetallepedidoPK(int pedidosId, int productosId) {
