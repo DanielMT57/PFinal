@@ -17,7 +17,9 @@ import javax.persistence.Embeddable;
  */
 @Embeddable
 public class DetallepedidoPK implements Serializable {
+    @Column(name = "pedidos_id")
     private int pedidosId;
+    @Column(name = "productos_id")
     private int productosId;
 
     public DetallepedidoPK() {

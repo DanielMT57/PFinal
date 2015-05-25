@@ -14,6 +14,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.JoinTable;
+import javax.persistence.MapsId;
 
 /**
  *
@@ -31,9 +32,13 @@ public class Detallepedido implements Serializable {
     private double preciounitario;
     @Column(name = "sincronizado")
     private Character sincronizado;
+    
+    @MapsId("productosId")
     @ManyToOne
     @JoinColumn(name = "productos_id", referencedColumnName = "id")
 	private Productos productos;
+    
+    @MapsId("pedidosId")
     @ManyToOne
     @JoinColumn(name = "Pedidos_id", referencedColumnName = "Id")
 	private Pedidos pedidos;

@@ -44,7 +44,7 @@ public class Personas implements Serializable {
     @Column(name = "email")
     private String email;
     @ManyToOne
-    @JoinColumn(name = "ciudadesId_id", referencedColumnName = "id")
+    @JoinColumn(name = "ciudades_id", referencedColumnName = "id")
 	private Ciudades ciudadesId;
     @OneToMany(mappedBy = "personas")
     private List<Sincronizada> sincronizadaPersonas;

@@ -18,8 +18,10 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class ProductosbodegaPK implements Serializable {
     
-    
+    @Column(name = "productos_id")
     private int productosId;
+
+    @Column(name = "bodegas_id")
     private int bodegasId;
 
     public ProductosbodegaPK() {

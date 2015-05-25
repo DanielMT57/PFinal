@@ -15,3 +15,6 @@
     *.jar
     *.war
     *.ear
+/Proyectofinal-ejb/target/
+/Proyectofinal-web/target/
+/Proyectofinal-ear/target/

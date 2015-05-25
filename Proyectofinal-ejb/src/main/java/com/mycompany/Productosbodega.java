@@ -13,6 +13,7 @@ import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.MapsId;
 import javax.persistence.Table;
 
 /**
@@ -26,9 +27,12 @@ public class Productosbodega implements Serializable {
     protected ProductosbodegaPK productosbodegaPK;
     @Column(name = "cantidad")
     private BigInteger cantidad;
+    
+    @MapsId("productosId")
     @JoinColumn(name = "productos_id", referencedColumnName = "Id")
     @ManyToOne
     private Productos productos;
+    @MapsId("bodegasId")
     @JoinColumn(name = "bodegas_id", referencedColumnName = "Id")
     @ManyToOne
     private Bodegas bodegas;

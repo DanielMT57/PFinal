@@ -32,10 +32,10 @@ public class Paginas implements Serializable {
     @Column(name = "numero")
     private BigInteger numero;
     @ManyToOne
-    @JoinColumn(name = "categoriaId_id", referencedColumnName = "id")
+    @JoinColumn(name = "categoria_id", referencedColumnName = "id")
 	private Categoria categoriaId;
     @ManyToOne
-    @JoinColumn(name = "catalogoId_Id", referencedColumnName = "Id")
+    @JoinColumn(name = "catalogo_Id", referencedColumnName = "Id")
 	private Catalogo catalogoId;
     @OneToMany(mappedBy = "paginasId")
     private List<Areaspagina> areaspaginaCollection;
