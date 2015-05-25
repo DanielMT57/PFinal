@@ -10,8 +10,10 @@
         <title>Productos</title>
     </h:head>
     <h:body>
-        Administracion de Personas
-        <h:form>                     
+    <h:link outcome="index" value="Volver"/>
+        <br></br>   
+        Administracion de Personas       
+        <h:form>             
             <p:panelGrid columns="2">
                 <p:outputLabel>Cedula</p:outputLabel>
                 <p:inputText id="tfCedula" required="true" value="#{personaBean.cedula}" />
