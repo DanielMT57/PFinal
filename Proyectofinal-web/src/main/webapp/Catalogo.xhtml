@@ -9,10 +9,12 @@
         <title>Catalogo</title>
     </h:head>
     <h:body>
+        <h:link outcome="index" value="Volver"/>
+      
         Administracion de Catalogo
-        <br />
-        <h:form>
 
+              
+        <h:form>          
             <p:panelGrid columns="2">
                 <p:outputLabel>Id</p:outputLabel>
                 <p:inputText id="tfId" required="true" value="#{catalogoBean.id}" />
