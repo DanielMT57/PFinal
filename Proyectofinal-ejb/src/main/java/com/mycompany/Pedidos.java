@@ -23,11 +23,14 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  *
  * @author german
  */
+@XmlRootElement(name = "pedidos")
 @Entity
 @Table(name = "Pedidos")
 @Inheritance(strategy=InheritanceType.JOINED)
@@ -63,14 +66,17 @@ public class Pedidos implements Serializable {
         this.detallepedidoCollection = detallepedidoCollection;
     }
 
+    @XmlElement
     public int getId() {
         return id;
     }
 
+   
     public void setId(int id) {
         this.id = id;
     }
-
+    
+@XmlElement
     public Date getFecha() {
         return fecha;
     }
@@ -87,6 +93,8 @@ public class Pedidos implements Serializable {
         this.sincronizado = sincronizado;
     }
 
+    
+    @XmlElement
     public Estado getEstadoId() {
         return estadoId;
     }
@@ -95,6 +103,7 @@ public class Pedidos implements Serializable {
         this.estadoId = estadoId;
     }
 
+    @XmlElement
     public Afiliados getAfiliadosCedula() {
         return afiliadosCedula;
     }
@@ -111,6 +120,8 @@ public class Pedidos implements Serializable {
         this.detallepedidoCollection = detallepedidoCollection;
     }
 
+    
+    @XmlElement
 	public String getDescripcion() {
 		return descripcion;
 	}

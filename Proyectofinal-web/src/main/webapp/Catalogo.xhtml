@@ -12,23 +12,23 @@
         Administracion de Catalogo
         <br />
         <h:form>
-            
+
             <p:panelGrid columns="2">
                 <p:outputLabel>Id</p:outputLabel>
                 <p:inputText id="tfId" required="true" value="#{catalogoBean.id}" />
-                
+
                 <p:outputLabel>Fecha Inicio</p:outputLabel>
                 <p:inputText id="tfFechaInicio" required="true" value="#{catalogoBean.fechaInicio}" />
-                
+
                 <p:outputLabel>Fecha Fin</p:outputLabel>
                 <p:inputText id="tfFechaFin" required="true" value="#{catalogoBean.fechaFin}" />
 
                 <p:outputLabel>Cantidad Paginas</p:outputLabel>
                 <p:inputText id="tfCantidadPaginas" required="true" value="#{catalogoBean.cantidadPaginas}" />
-                
+
                 <p:outputLabel>Cantidad Productos</p:outputLabel>
                 <p:inputText id="tfCantidadProductos" required="true" value="#{catalogoBean.cantidadProductos}" />
-                
+
             </p:panelGrid>
         </h:form>
     </h:body>
