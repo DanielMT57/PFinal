@@ -9,13 +9,21 @@
         <title>Catalogo</title>
     </h:head>
     <h:body>
+
         <h:link outcome="index" value="Volver"/>            
 
 
 
-        <h:form>           
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+              
+          
 
+
+     
+        <br><br/>
+        Administracion de Catalogo
+        </br>
+        <h:form>           
+  <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" /> 
             <p:panelGrid columns="2">
                 <p:outputLabel>Id</p:outputLabel>
                 <p:inputText id="tfId" required="true" value="#{catalogoBean.id}" />
