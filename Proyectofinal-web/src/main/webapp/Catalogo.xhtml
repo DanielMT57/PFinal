@@ -9,80 +9,80 @@
         <title>Catalogo</title>
     </h:head>
     <h:body>
-        <h:link outcome="index" value="Volver"/>
-      
-        Administracion de Catalogo
+        <h:link outcome="index" value="Volver"/>            
 
-              
-        <h:form>  
-              <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+
+        <h:form>           
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
             <p:panelGrid columns="2">
                 <p:outputLabel>Id</p:outputLabel>
                 <p:inputText id="tfId" required="true" value="#{catalogoBean.id}" />
 
-               <p:outputLabel for="mask" value="Fecha inicio:" />
-               <p:calendar id="mask" value="#{catalogoBean.fechaInicio}" pattern="dd-MM-yyyy"  />
-               
-                   <p:outputLabel for="mask2" value="Fecha Fin:" />
-                   <p:calendar id="mask2" value="#{catalogoBean.fechaFin}" pattern="dd-MM-yyyy"  />
- 
+                <p:outputLabel for="mask" value="Fecha inicio:" />
+                <p:calendar id="mask" value="#{catalogoBean.fechaInicio}" pattern="dd-MM-yyyy"  />
+
+                <p:outputLabel for="mask2" value="Fecha Fin:" />
+                <p:calendar id="mask2" value="#{catalogoBean.fechaFin}" pattern="dd-MM-yyyy"  />
+
 
                 <p:outputLabel>Cantidad Paginas</p:outputLabel>
                 <p:inputText id="tfCantidadPaginas"  value="#{catalogoBean.cantidadPaginas}" />
 
                 <p:outputLabel>Cantidad Productos</p:outputLabel>
                 <p:inputText id="tfCantidadProductos"  value="#{catalogoBean.cantidadProductos}" />
-                
-                
+
+
                 <p:commandButton value="Insertar" action="#{catalogoBean.crearCatalogo()}" update="@form"/>
                 <p:commandButton value="Buscar" action="#{catalogoBean.buscarCatalogo()}" update="@form" />
-                
+
                 <p:commandButton value="Actualizar" action="#{catalogoBean.actualizarCatalogo()}" update="@form" />
                 <p:commandButton value="Eliminar" action="#{catalogoBean.eliminarCatalogo()}" update="@form" />
-                
-                
+
+
 
             </p:panelGrid>
-              
-              
-              
-              
 
-              <p:dataTable  var="ca" value="#{catalogoBean.catalogos}">
+
+
+
+
+            <p:dataTable  var="ca" value="#{catalogoBean.catalogos}">
                 <p:column headerText="id">
                     <h:outputText value="#{ca.id}" />
- 
+
                 </p:column>
 
                 <p:column headerText="Fecha Inicio">
-                 
-                        <h:outputText value="#{ca.fechainicio}">
-                <f:convertDateTime pattern="dd/MM/yyyy" />
-            </h:outputText>
-                    
+
+                    <h:outputText value="#{ca.fechainicio}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+
                 </p:column>
 
 
                 <p:column headerText="Fecha Fin">
                     <h:outputText value="#{ca.fechafin}">
-                <f:convertDateTime pattern="dd/MM/yyyy" />
-            </h:outputText>   
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>   
 
                 </p:column>
-                  
-                  
+
+
                 <p:column headerText="Cantidad Pags">
                     <h:outputText value="#{ca.cantidadpaginas}" />    
 
                 </p:column>
-                  
-                     <p:column headerText="Cantidad Productos">
-                         <h:outputText value="#{ca.cantidadproductos}" />    
+
+                <p:column headerText="Cantidad Productos">
+                    <h:outputText value="#{ca.cantidadproductos}" />    
 
                 </p:column>
-                
+
             </p:dataTable>
-                
+
         </h:form>
     </h:body>
 </html>
