@@ -35,12 +35,12 @@
             </p:panel>
             <p:panel header="Administracion de Afiliados">
                 <h:panelGrid columns="2" cellpadding="3">
-             
+
                     <p:outputLabel>Nivel</p:outputLabel>
                     <p:selectOneMenu value="#{personaBean.idNiveles}" id="cbxNivel" style="width:80%">
                         <f:selectItems value="#{personaBean.niveles}" var="niveles" itemValue="${niveles.id}" itemLabel="${niveles.descripcion}" />
                     </p:selectOneMenu>  
-                
+
                     <p:outputLabel for="mask2" value="Fecha afiliacion:" />
                     <p:calendar id="mask2" value="#{personaBean.fechaAfiliacion}" pattern="dd-MM-yyyy"  />
                 </h:panelGrid> 
