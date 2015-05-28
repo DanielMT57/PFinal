@@ -30,6 +30,28 @@
                 <p:commandButton value="Actualizar" action="#{bodegaBean.actualizarBodega()}" update="@form" />
                 <p:commandButton value="Eliminar" action="#{bodegaBean.eliminarBodega()}" update="@form" />
             </p:panelGrid>
+                
+                
+                
+                
+
+                <p:dataTable  var="bo" value="#{bodegaBean.bodegas}">
+                <p:column headerText="id">
+                    <h:outputText value="#{bo.id}" />
+                </p:column>
+
+                <p:column headerText="Ciudad">
+                    <h:outputText value="#{bo.ciudadesId.descripcion}" />      
+                </p:column>
+
+
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{bo.direccion}" />    
+
+                </p:column>
+                
+            </p:dataTable>
+                
         </h:form>
     </h:body>
 </html>

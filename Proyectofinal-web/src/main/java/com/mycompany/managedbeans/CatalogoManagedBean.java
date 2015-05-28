@@ -6,17 +6,18 @@
 package com.mycompany.managedbeans;
 
 import com.mycompany.Bodegas;
-import java.io.Serializable;
-import java.util.Date;
-import javax.annotation.ManagedBean;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import javax.inject.Named;
-import javax.faces.view.ViewScoped;
 import com.mycompany.Catalogo;
 import com.mycompany.Productos;
 import com.mycompany.sessionbeans.CatalogoEJB;
+import java.io.Serializable;
+import java.util.Date;
+import java.util.List;
+import javax.annotation.ManagedBean;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import javax.faces.view.ViewScoped;
+import javax.inject.Named;
 
 /**
  *
@@ -141,6 +142,16 @@ public class CatalogoManagedBean implements Serializable {
          System.out.println("ha eliminado correctamente");
         limpiar();
     }
+      
+      
+       private List<Catalogo> catalogos;
+
+    public List<Catalogo> getCatalogos() {
+        catalogos =catalogoejb.listarTodos();
+        return catalogos;
+    }
+       
+       
 
     private void limpiar() {
         setId(0);

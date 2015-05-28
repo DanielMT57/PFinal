@@ -140,6 +140,23 @@ public class ProductoManagedBean implements Serializable {
     }
       
       
+    
+       private List<Productos> productos;
+
+    public List<Productos> getProductos() {
+         productos = productoEJB.listarTodos();
+        return productos;
+    }
+       
+       
+//     
+//      public List<Productos> getproductos() {
+//            productos = productoEJB.listarTodos();
+//        return productos;
+//      
+//          
+//      }
+      
       
     public int getId() {
         return id;
@@ -224,8 +241,8 @@ public class ProductoManagedBean implements Serializable {
     private void limpiar() {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
-        this.setCategorias(null);
-        this.setColores(null);
+       // this.setCategorias(null);
+       // this.setColores(null);
         //this.setDescripcion(null);
         this.setId(0);
         this.setPrecioCompra(0);

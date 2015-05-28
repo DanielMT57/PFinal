@@ -144,10 +144,20 @@ public class BodegaManagedBean implements Serializable{
        // System.out.println("ha actualizado correctamente");
         limpiar();
     }
+     
+        private List<Bodegas> bodegas;
+
+    public List<Bodegas> getBodegas() {
+        bodegas= bodegaEJB.listarTodos();
+        return bodegas;
+    }
+        
+        
+        
     private void limpiar() {
 
         this.setId(0);
-        this.setIdCiudades(0);
+      //  this.setIdCiudades(0);
         this.setDireccion(null);
 
     }

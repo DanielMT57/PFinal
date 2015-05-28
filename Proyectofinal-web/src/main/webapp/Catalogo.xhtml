@@ -43,6 +43,46 @@
                 
 
             </p:panelGrid>
+              
+              
+              
+              
+
+              <p:dataTable  var="ca" value="#{catalogoBean.catalogos}">
+                <p:column headerText="id">
+                    <h:outputText value="#{ca.id}" />
+ 
+                </p:column>
+
+                <p:column headerText="Fecha Inicio">
+                 
+                        <h:outputText value="#{ca.fechainicio}">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>
+                    
+                </p:column>
+
+
+                <p:column headerText="Fecha Fin">
+                    <h:outputText value="#{ca.fechafin}">
+                <f:convertDateTime pattern="dd/MM/yyyy" />
+            </h:outputText>   
+
+                </p:column>
+                  
+                  
+                <p:column headerText="Cantidad Pags">
+                    <h:outputText value="#{ca.cantidadpaginas}" />    
+
+                </p:column>
+                  
+                     <p:column headerText="Cantidad Productos">
+                         <h:outputText value="#{ca.cantidadproductos}" />    
+
+                </p:column>
+                
+            </p:dataTable>
+                
         </h:form>
     </h:body>
 </html>

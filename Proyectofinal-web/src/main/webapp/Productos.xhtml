@@ -9,13 +9,13 @@
         <title>Productos</title>
     </h:head>
     <h:body>
-       <h:link outcome="index" value="Volver"/>
+        <h:link outcome="index" value="Volver"/>
         <br><br/>
-      Administracion de Productos      
+            Administracion de Productos      
         </br>
         <h:form>   
-            
-              <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panelGrid columns="2">
                 <p:outputLabel>Codigo</p:outputLabel>
                 <p:inputText id="tfCodigo"  value="#{productoBean.id}" />
@@ -37,15 +37,63 @@
                 <p:inputText id="tfPrecioCompra"  value="#{productoBean.precioCompra}" />
                 <p:outputLabel>Precio Venta</p:outputLabel>
                 <p:inputText id="tfPrecioVenta"  value="#{productoBean.precioVenta}" />               
-                   <p:outputLabel>descripcion</p:outputLabel>
-                   <p:inputText id="tfdescripcion"  value="#{productoBean.descripcion}" />
-                   
-                   <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
-                   <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
-                   <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
-                   <p:commandButton value ="Eliminar" action ="#{productoBean.eliminarProducto()}" update="@form"/>
-                    
+                <p:outputLabel>descripcion</p:outputLabel>
+                <p:inputText id="tfdescripcion"  value="#{productoBean.descripcion}" />
+
+                <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
+                <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
+                <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
+                <p:commandButton value ="Eliminar" action ="#{productoBean.eliminarProducto()}" update="@form"/>
+
             </p:panelGrid>   
+
+
+
+            <p:dataTable  var="pro" value="#{productoBean.productos}">
+                <p:column headerText="id">
+                    <h:outputText value="#{pro.id}" />
+                </p:column>
+
+                <p:column headerText="color">
+                    <h:outputText value="#{pro.colorId.descripcion}" />      
+                </p:column>
+
+
+                <p:column headerText="categoria">
+                    <h:outputText value="#{pro.categoriaId.descripcion}" />    
+
+                </p:column>
+                
+                
+                <p:column headerText="marca">
+                    <h:outputText value="#{pro.marcaId.descripcion}" />    
+
+                </p:column>
+                
+                  
+                <p:column headerText="Peso">
+                    <h:outputText value="#{pro.peso}" />    
+
+                </p:column>
+                
+                     <p:column headerText="Preciocompra">
+                         <h:outputText value="#{pro.precioCompra}" />    
+
+                </p:column>
+
+                
+                
+                     <p:column headerText="PrecioVenta">
+                         <h:outputText value="#{pro.precioVenta}" />    
+
+                </p:column>
+                
+                
+                     <p:column headerText="Descripcion">
+                         <h:outputText value="#{pro.descripcion}" />    
+
+                </p:column>
+            </p:dataTable>
         </h:form> 
         <h:link outcome="welcomePrimefaces" value="Primefaces welcome page" />
     </h:body>
