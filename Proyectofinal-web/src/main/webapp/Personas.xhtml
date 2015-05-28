@@ -34,19 +34,15 @@
                 </h:panelGrid>
             </p:panel>
             <p:panel header="Administracion de Afiliados">
-                <h:panelGrid columns="4" cellpadding="3">
-                    <p:outputLabel>Cedula Afiliado</p:outputLabel>
-                    <p:inputText id="tfCedulaAfiliado" required="true" value="#{afiliadoBean.cedula}" />
+                <h:panelGrid columns="2" cellpadding="3">
+             
                     <p:outputLabel>Nivel</p:outputLabel>
-                    <p:selectOneMenu value="#{afiliadoBean.idNiveles}" id="cbxNivel" style="width:75%">
-                        <f:selectItems value="#{afiliadoBean.niveles}" var="niveles" itemValue="${niveles.id}" itemLabel="${niveles.descripcion}" />
+                    <p:selectOneMenu value="#{personaBean.idNiveles}" id="cbxNivel" style="width:80%">
+                        <f:selectItems value="#{personaBean.niveles}" var="niveles" itemValue="${niveles.id}" itemLabel="${niveles.descripcion}" />
                     </p:selectOneMenu>  
-                    <p:outputLabel>Afiliado</p:outputLabel>
-                    <p:selectOneMenu value="#{afiliadoBean.idAfiliados}" id="cbxAfiliados" style="width:75%">
-                        <f:selectItems value="#{afiliadoBean.afiliados}" var="afiliados" itemValue="${afiliados.id}" itemLabel="${afiliados.direccion}" />
-                    </p:selectOneMenu> 
-                    <p:outputLabel>Fecha Afiliacion</p:outputLabel>
-                    <p:inputText id="tfFechaAfiliacion" required="true" value="#{afiliadoBean.fechaAfiliacion}" />
+                
+                    <p:outputLabel for="mask2" value="Fecha afiliacion:" />
+                    <p:calendar id="mask2" value="#{personaBean.fechaAfiliacion}" pattern="dd-MM-yyyy"  />
                 </h:panelGrid> 
             </p:panel>
             <p:row>

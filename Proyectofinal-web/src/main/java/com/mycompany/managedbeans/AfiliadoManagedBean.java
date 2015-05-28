@@ -113,7 +113,7 @@ public class AfiliadoManagedBean implements Serializable{
       @PostConstruct
     public void postConstruct() {
         niveles = nivelesEJB.listarTodos();
-        //afiliados = afiliadosEJB.listarTodos();
+     
     }
     
     

@@ -6,9 +6,12 @@
 package com.mycompany.managedbeans;
 
 import com.mycompany.Ciudades;
+import com.mycompany.Nivel;
 import com.mycompany.sessionbeans.CiudadesEJB;
+import com.mycompany.sessionbeans.NivelesEJB;
 import com.mycompany.sessionbeans.PersonasEJB;
 import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
@@ -40,7 +43,16 @@ public class PersonaManagedBean implements Serializable {
     @EJB
     private CiudadesEJB ciudadesEJB;
     
+      @EJB
+    private NivelesEJB nivelesEJB;
+    
 
+      
+          private List<Nivel> niveles;
+            private Date fechaAfiliacion; 
+            
+             private int idNiveles;
+            
     /**
      * Creates a new instance of PersonaManagedBean
      */
@@ -48,6 +60,9 @@ public class PersonaManagedBean implements Serializable {
     @PostConstruct
     public void postConstruct() {
         ciudades = ciudadesEJB.listarTodos();
+        
+          niveles = nivelesEJB.listarTodos();
+        
     }
 
     public int getCedula() {
@@ -129,4 +144,30 @@ public class PersonaManagedBean implements Serializable {
     public void setCiudadesEJB(CiudadesEJB ciudadesEJB) {
         this.ciudadesEJB = ciudadesEJB;
     }
+
+    public List<Nivel> getNiveles() {
+        return niveles;
+    }
+
+    public void setNiveles(List<Nivel> niveles) {
+        this.niveles = niveles;
+    }
+
+    public Date getFechaAfiliacion() {
+        return fechaAfiliacion;
+    }
+
+    public void setFechaAfiliacion(Date fechaAfiliacion) {
+        this.fechaAfiliacion = fechaAfiliacion;
+    }
+
+    public int getIdNiveles() {
+        return idNiveles;
+    }
+
+    public void setIdNiveles(int idNiveles) {
+        this.idNiveles = idNiveles;
+    }
+    
+    
 }

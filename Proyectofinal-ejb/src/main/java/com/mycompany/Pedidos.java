@@ -18,6 +18,7 @@ import javax.persistence.Inheritance;
 import javax.persistence.InheritanceType;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
+import javax.persistence.NamedQuery;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
@@ -33,8 +34,12 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "pedidos")
 @Entity
 @Table(name = "Pedidos")
+@NamedQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT p From Pedidos p")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pedidos implements Serializable {
+    public static final String CONSULTA_LISTARTODOS = "pedidos.listartodos";
+    
+    
     @Id
     @Column(name = "Id")
     private int id;

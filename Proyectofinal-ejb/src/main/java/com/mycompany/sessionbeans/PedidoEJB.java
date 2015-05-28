@@ -13,6 +13,7 @@ import javax.ejb.Stateless;
 import javax.jws.WebMethod;
 import javax.jws.WebResult;
 import javax.jws.WebService;
+import javax.persistence.Query;
 import javax.ws.rs.Produces;
 
 /**
@@ -32,6 +33,10 @@ public class PedidoEJB extends EJBGenerico<Pedidos>{
     @WebResult(name="listaPedidos")
    
     public List<Pedidos> listarPedidos(){
-        return super.listarTodos();
+        Query q=super.getEm().createNamedQuery(Pedidos.CONSULTA_LISTARTODOS);
+        return q.getResultList();
     }
+    
+    
+    
 }
