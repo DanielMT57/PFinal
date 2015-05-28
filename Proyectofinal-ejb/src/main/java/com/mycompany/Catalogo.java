@@ -37,22 +37,13 @@ public class Catalogo implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechafin;
     @Column(name = "cantidadpaginas")
-    private BigInteger cantidadpaginas;
+    private int cantidadpaginas;
     @Column(name = "cantidadproductos")
-    private BigInteger cantidadproductos;
+    private int cantidadproductos;
     @OneToMany(cascade = CascadeType.ALL, mappedBy = "catalogoId")
     private Collection<Paginas> paginasCollection;
 
     public Catalogo() {
-    }
-
-    public Catalogo(int id, Date fechainicio, Date fechafin, BigInteger cantidadpaginas, BigInteger cantidadproductos, Collection<Paginas> paginasCollection) {
-        this.id = id;
-        this.fechainicio = fechainicio;
-        this.fechafin = fechafin;
-        this.cantidadpaginas = cantidadpaginas;
-        this.cantidadproductos = cantidadproductos;
-        this.paginasCollection = paginasCollection;
     }
 
     public int getId() {
@@ -79,19 +70,19 @@ public class Catalogo implements Serializable {
         this.fechafin = fechafin;
     }
 
-    public BigInteger getCantidadpaginas() {
+    public int getCantidadpaginas() {
         return cantidadpaginas;
     }
 
-    public void setCantidadpaginas(BigInteger cantidadpaginas) {
+    public void setCantidadpaginas(int cantidadpaginas) {
         this.cantidadpaginas = cantidadpaginas;
     }
 
-    public BigInteger getCantidadproductos() {
+    public int getCantidadproductos() {
         return cantidadproductos;
     }
 
-    public void setCantidadproductos(BigInteger cantidadproductos) {
+    public void setCantidadproductos(int cantidadproductos) {
         this.cantidadproductos = cantidadproductos;
     }
 
@@ -102,6 +93,7 @@ public class Catalogo implements Serializable {
     public void setPaginasCollection(Collection<Paginas> paginasCollection) {
         this.paginasCollection = paginasCollection;
     }
+
 
   
 }

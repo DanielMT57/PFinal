@@ -13,6 +13,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.ManagedBean;
+import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
 import javax.inject.Named;
 import javax.faces.view.ViewScoped;
@@ -109,6 +110,11 @@ public class AfiliadoManagedBean implements Serializable{
 //    public AfiliadoManagedBean() {        
 //    }
     
+      @PostConstruct
+    public void postConstruct() {
+        niveles = nivelesEJB.listarTodos();
+        //afiliados = afiliadosEJB.listarTodos();
+    }
     
     
 }
