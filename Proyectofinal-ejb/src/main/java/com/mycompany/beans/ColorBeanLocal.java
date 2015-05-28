@@ -11,7 +11,7 @@ import javax.ejb.Local;
 
 /**
  *
- * @author Daniel
+ * @author Daniel 
  */
 @Local
 public interface ColorBeanLocal {
