@@ -22,18 +22,18 @@ import javax.ws.rs.Produces;
  */
 @Stateless
 @LocalBean
-@WebService(portName="PedidoWSPort", serviceName="PedidoWSService", targetNamespace="http://localhost:8082/PedidoWSPort/PedidoWSService")
- @Produces("application/json")
+//@WebService(portName="PedidoWSPort", serviceName="PedidoWSService", targetNamespace="http://localhost:8082/PedidoWSPort/PedidoWSService")
+// @Produces("application/json")
 public class PedidoEJB extends EJBGenerico<Pedidos>{
 
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method"
-
-    @WebMethod(operationName = "listarPedidos")
-    @WebResult(name="listaPedidos")
+//
+//    @WebMethod(operationName = "listarPedidos")
+//    @WebResult(name="listaPedidos")
    
     public List<Pedidos> listarPedidos(){
-        Query q=super.getEm().createNamedQuery(Pedidos.CONSULTA_LISTARTODOS);
+        Query q=super.getEm().createNativeQuery(Pedidos.CONSULTA_LISTARTODOS);
         return q.getResultList();
     }
     
