@@ -19,8 +19,9 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
-import javax.persistence.Table;
 import javax.persistence.PrimaryKeyJoinColumn;
+import javax.persistence.Table;
+import org.eclipse.persistence.annotations.ClassExtractor;
 
 /**
  *
@@ -29,6 +30,7 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @Entity
 @Table(name = "PERSONAS")
 @Inheritance(strategy=InheritanceType.JOINED)
+@ClassExtractor(PersonasExtractor.class)
 public class Personas implements Serializable {
     @Id
     @Column(name = "cedula")
@@ -48,13 +50,13 @@ public class Personas implements Serializable {
 	private Ciudades ciudadesId;
     @OneToMany(mappedBy = "personas")
     private List<Sincronizada> sincronizadaPersonas;
-    @OneToOne(mappedBy = "personas")
-    private Afiliados afiliados;
+//    @OneToOne(mappedBy = "personas")
+//    private Afiliados afiliados;
 
     public Personas() {
     }
 
-    public Personas(int cedula, Long telefono, String nombre, String apellidos, String direccion, String email, Ciudades ciudadesId, List<Sincronizada> sincronizadaPersonas, Afiliados afiliados) {
+    public Personas(int cedula, Long telefono, String nombre, String apellidos, String direccion, String email, Ciudades ciudadesId, List<Sincronizada> sincronizadaPersonas) {
         this.cedula = cedula;
         this.telefono = telefono;
         this.nombre = nombre;
@@ -63,7 +65,6 @@ public class Personas implements Serializable {
         this.email = email;
         this.ciudadesId = ciudadesId;
         this.sincronizadaPersonas = sincronizadaPersonas;
-        this.afiliados = afiliados;
     }
 
     public int getCedula() {
@@ -128,14 +129,6 @@ public class Personas implements Serializable {
 
     public void setSincronizadaPersonas(List<Sincronizada> sincronizadaPersonas) {
         this.sincronizadaPersonas = sincronizadaPersonas;
-    }
-
-    public Afiliados getAfiliados() {
-        return afiliados;
-    }
-
-    public void setAfiliados(Afiliados afiliados) {
-        this.afiliados = afiliados;
     }
 
     

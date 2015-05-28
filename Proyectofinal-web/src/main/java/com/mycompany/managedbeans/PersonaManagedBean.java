@@ -171,8 +171,9 @@ public class PersonaManagedBean implements Serializable {
     public void setIdNiveles(int idNiveles) {
         this.idNiveles = idNiveles;
     }
-    
+   
     public void crearPersonas() {
+        
         Personas pe = new Personas();
         pe.setCedula(cedula);
         pe.setTelefono(telefono);
@@ -181,12 +182,12 @@ public class PersonaManagedBean implements Serializable {
         pe.setDireccion(direccion);
         pe.setEmail(email);
         pe.setCiudadesId(ciudadesEJB.buscar(idCiudades));
-        personasEJB.crear(pe);
+//        personasEJB.crear(pe);
         
-        Afiliados af = new Afiliados();
-        af.setCedula(cedula);
-        af.setAfiliados((Afiliados) pe);
-        af.setNivel(nivelesEJB.buscar(idNiveles));
+        //pe=personasEJB.buscar(pe.getCedula());
+        Afiliados af = new Afiliados(fechaAfiliacion, '0', nivelesEJB.buscar(idNiveles), cedula, telefono, nombre, apellido, direccion, ciudadesEJB.buscar(idCiudades), email);
+//        af.setCedula(pe.getCedula());
+//        af.setNivel();
         
         afiliadosEJB.crear(af);
         

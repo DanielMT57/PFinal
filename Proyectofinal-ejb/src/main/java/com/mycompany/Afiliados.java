@@ -31,7 +31,7 @@ import javax.validation.constraints.NotNull;
 @Entity
 @Table(name = "Afiliados")
 @PrimaryKeyJoinColumn(name = "cedula", referencedColumnName = "cedula")
-public class Afiliados extends Personas implements Serializable {
+public class Afiliados extends Personas {
     @Column(name = "fechaafiliacion")
     @Temporal(TemporalType.DATE)
     private Date fechaafiliacion;
@@ -39,26 +39,27 @@ public class Afiliados extends Personas implements Serializable {
     private Character sincronizado;
     @OneToMany(mappedBy = "afiliadosCedula")
     private List<Pedidos> pedidosCollection;
+//    @OneToOne
+//    @JoinColumn(name = "personas_cedula", referencedColumnName = "cedula")
+//	private Personas personas;
     @OneToOne
-    @JoinColumn(name = "personas_cedula", referencedColumnName = "cedula")
-	private Personas personas;
-    @OneToOne
-    @JoinColumn(name = "afiliadosCollection_cedula", referencedColumnName = "cedula")
+    @JoinColumn(name = "Afiliados_cedula", referencedColumnName = "cedula")
 	private Afiliados afiliadosCollection;
     @ManyToOne
-    @JoinColumn(name="nivel_id", referencedColumnName = "id")
+    @JoinColumn(name="niveles_id", referencedColumnName = "id")
     private Nivel nivel;
 
     public Afiliados() {
     }
 
-    public Afiliados( Date fechaafiliacion, Character sincronizado, List<Pedidos> pedidosCollection, Personas personas, Collection<Afiliados> afiliadosCollection, Afiliados afiliadosCedula, Nivel nivel) {
+    public Afiliados(Date fechaafiliacion, Character sincronizado, Nivel nivel, int cedula, long telefono, String nombre, String apellido, String direccion, Ciudades ciudad, String email) {
+        super(cedula, telefono, nombre, apellido, direccion, email, ciudad, null);
         this.fechaafiliacion = fechaafiliacion;
         this.sincronizado = sincronizado;
-        this.pedidosCollection = pedidosCollection;
-        this.personas = personas;
-        this.nivel=nivel;
+        this.nivel = nivel;
     }
+
+  
 
     public Nivel getNivel() {
         return nivel;
@@ -101,13 +102,7 @@ public class Afiliados extends Personas implements Serializable {
         this.pedidosCollection = pedidosCollection;
     }
 
-    public Personas getPersonas() {
-        return personas;
-    }
-
-    public void setPersonas(Personas personas) {
-        this.personas = personas;
-    }
+  
 
    
 }
