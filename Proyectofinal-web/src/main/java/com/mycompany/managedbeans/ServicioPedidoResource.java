@@ -19,6 +19,7 @@ import javax.ws.rs.Path;
 import javax.ws.rs.GET;
 import javax.ws.rs.Produces;
 import javax.enterprise.context.RequestScoped;
+import javax.persistence.Query;
 
 /**
  * REST Web Service
@@ -48,7 +49,9 @@ public class ServicioPedidoResource {
     @GET
     @Produces("application/json")
     public List<Pedidos> listarPedidos(){
+       
         return pe.listarPedidos();
+       
     }
 
     /**

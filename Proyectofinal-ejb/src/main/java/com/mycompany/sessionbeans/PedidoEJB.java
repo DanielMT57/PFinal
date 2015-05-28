@@ -34,6 +34,8 @@ public class PedidoEJB extends EJBGenerico<Pedidos>{
    
     public List<Pedidos> listarPedidos(){
         Query q=super.getEm().createNativeQuery(Pedidos.CONSULTA_LISTARTODOS);
+        
+       // Query q=super.getEm().createNativeQuery("Select fecha from Pedidos");
         return q.getResultList();
     }
     

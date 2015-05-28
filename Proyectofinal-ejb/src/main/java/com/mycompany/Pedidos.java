@@ -35,10 +35,10 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "pedidos")
 @Entity
 @Table(name = "Pedidos")
-@NamedNativeQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT * From Pedidos", resultClass = Pedidos.class)
+@NamedNativeQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  * From Pedidos ", resultClass = Pedidos.class)
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pedidos implements Serializable {
-    public static final String CONSULTA_LISTARTODOS = "pedidos.listartodos";
+    public static final String CONSULTA_LISTARTODOS = "Pedidos.listartodos";
     
     
     @Id
