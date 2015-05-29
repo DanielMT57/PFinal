@@ -9,13 +9,50 @@
         <title>Pedidos</title>
     </h:head>
     <h:body>
-        <br />
-        <h:form>
-            Administracion de Pedidos 
-            <p:panelGrid columns="2">
+        <br/> 
+        <h:link outcome="Principal" value="Volver"/>         
+        <h:form>            
+            <p:panel header="Administracion de Peroductos">              
+                <h:panelGrid columns="4" cellpadding="3">
+                    <p:outputLabel>Id Pedido</p:outputLabel>
+                    <p:inputText id="tfIdPedido"  value="" />
+                    <p:outputLabel>Cedula del Afiliado</p:outputLabel>
+                    <p:selectOneMenu value="" id="cbxCedulaAfiliado" style="width:75%">
+                        <f:selectItems value="" var="cedAfiliado" itemValue="" itemLabel="" />
+                    </p:selectOneMenu>   
+                    <p:outputLabel>Estado</p:outputLabel>
+                    <p:selectOneMenu value="" id="cbxEstado" style="width:75%">
+                        <f:selectItems value="" var="estado" itemValue="" itemLabel="" />
+                    </p:selectOneMenu>
+                    <p:outputLabel>Fecha</p:outputLabel>
+                    <p:inputText id="tfFecha" value="" />
+                    <p:outputLabel>Descripcion</p:outputLabel>
+                    <p:inputText id="tfDescripcion"  value="" />
+                </h:panelGrid> 
+            </p:panel>
+                      
+            <p:panel header="Detalles del pedido ">       
+                <h:panelGrid columns="2" cellpadding="3">
 
-                
-            </p:panelGrid>
-        </h:form>
+                    <p:outputLabel>Id del Producto</p:outputLabel>
+                    <p:selectOneMenu value="" id="cbxIdProducto" style="width:75%">
+                        <f:selectItems value="" var="niveles" itemValue="" itemLabel="" />
+                    </p:selectOneMenu>  
+
+                    <p:outputLabel>Cantidad</p:outputLabel>
+                    <p:inputText id="tfCantidad" required="true" value="" />
+
+                    <p:outputLabel>Precio Unitario</p:outputLabel>
+                    <p:inputText id="tfPrecioUnitario" required="true" value="" />
+                </h:panelGrid>
+            </p:panel>       
+            <p:panelGrid columns="4">       
+                <p:row>
+                    <p:commandButton value="Insertar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false"/>
+                    <p:commandButton value="Buscar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
+                    <p:commandButton value="Actualizar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
+                </p:row>
+            </p:panelGrid>                 
+        </h:form> 
     </h:body>
 </html>

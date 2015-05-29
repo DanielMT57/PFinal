@@ -9,35 +9,30 @@
         <title>Bodegas</title>
     </h:head>
     <h:body>
-        <h:link outcome="index" value="Volver"/>
-        <br><br/>
-        Administracion de Bodega 
-        </br>
+        <br/> 
+        <h:link outcome="Principal" value="Volver"/>   
+
         <h:form>
-                <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:panelGrid columns="2">
-                <p:outputLabel>Id</p:outputLabel>
-                <p:inputText id="tfId" required="true" value="#{bodegaBean.id}" />
+            <p:panel header="Administracion de Bodega ">              
+                <h:panelGrid columns="2" cellpadding="3">                
+                    <p:outputLabel>Id</p:outputLabel>
+                    <p:inputText id="tfId" required="true" value="#{bodegaBean.id}" />
+                    <p:outputLabel>Ciudad</p:outputLabel>
+                    <p:selectOneMenu value="#{bodegaBean.idCiudades}" id="cbxCiudad" style="width:75%">
+                        <f:selectItems value="#{bodegaBean.ciudades}" var="ciudad" itemValue="${ciudad.id}" itemLabel="${ciudad.descripcion}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel>Direccion</p:outputLabel>
+                    <p:inputText id="tfDireccion"  value="#{bodegaBean.direccion}" />   
+                </h:panelGrid>
+            </p:panel>
 
-                <p:outputLabel>Ciudad</p:outputLabel>
-                <p:selectOneMenu value="#{bodegaBean.idCiudades}" id="cbxCiudad" style="width:75%">
-                <f:selectItems value="#{bodegaBean.ciudades}" var="ciudad" itemValue="${ciudad.id}" itemLabel="${ciudad.descripcion}" />
-                </p:selectOneMenu>
+            <p:commandButton value="Insertar" action="#{bodegaBean.crearBodega()}" update="@form"/>
+            <p:commandButton value="Buscar" action="#{bodegaBean.buscarBodega()}" update="@form" />
+            <p:commandButton value="Actualizar" action="#{bodegaBean.actualizarBodega()}" update="@form" />
+            <p:commandButton value="Eliminar" action="#{bodegaBean.eliminarBodega()}" update="@form" />
 
-                <p:outputLabel>Direccion</p:outputLabel>
-                <p:inputText id="tfDireccion"  value="#{bodegaBean.direccion}" />   
-                
-                <p:commandButton value="Insertar" action="#{bodegaBean.crearBodega()}" update="@form"/>
-                <p:commandButton value="Buscar" action="#{bodegaBean.buscarBodega()}" update="@form" />
-                <p:commandButton value="Actualizar" action="#{bodegaBean.actualizarBodega()}" update="@form" />
-                <p:commandButton value="Eliminar" action="#{bodegaBean.eliminarBodega()}" update="@form" />
-            </p:panelGrid>
-                
-                
-                
-                
 
-                <p:dataTable  var="bo" value="#{bodegaBean.bodegas}">
+            <p:dataTable  var="bo" value="#{bodegaBean.bodegas}">
                 <p:column headerText="id">
                     <h:outputText value="#{bo.id}" />
                 </p:column>
@@ -51,9 +46,9 @@
                     <h:outputText value="#{bo.direccion}" />    
 
                 </p:column>
-                
+
             </p:dataTable>
-                
+
         </h:form>
     </h:body>
 </html>

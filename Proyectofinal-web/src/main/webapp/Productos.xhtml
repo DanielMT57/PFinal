@@ -9,51 +9,39 @@
         <title>Productos</title>
     </h:head>
     <h:body>
-
-
-    
-     
-       
-
-       <h:link outcome="index" value="Volver"/>
-        <br><br/>
-     
-        </br>
-
+        <br/> 
+        <h:link outcome="Principal" value="Volver"/>   
         <h:form>   
-
-            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:panelGrid columns="2">
-                <p:outputLabel>Codigo</p:outputLabel>
-                <p:inputText id="tfCodigo"  value="#{productoBean.id}" />
-                <p:outputLabel>Color</p:outputLabel>
-                <p:selectOneMenu value="#{productoBean.idColor}" id="cbxColor" style="width:75%">
-                    <f:selectItems value="#{productoBean.colores}" var="color" itemValue="${color.id}" itemLabel="${color.descripcion}" />
-                </p:selectOneMenu>   
-                <p:outputLabel>Categoria</p:outputLabel>
-                <p:selectOneMenu value="#{productoBean.idCategoria}" id="cbxCategoria" style="width:75%">
-                    <f:selectItems value="#{productoBean.categorias}" var="categoria" itemValue="${categoria.id}" itemLabel="${categoria.descripcion}" />
-                </p:selectOneMenu>
-                <p:outputLabel>Marcas</p:outputLabel>
-                <p:selectOneMenu value="#{productoBean.idMarca}" id="cbxMarca" style="width:75%">
-                    <f:selectItems value="#{productoBean.marcas}" var="marca" itemValue="${marca.id}" itemLabel="${marca.descripcion}" />
-                </p:selectOneMenu>
-                <p:outputLabel>Peso</p:outputLabel>
-                <p:inputText id="tfPeso" value="#{productoBean.peso}" />
-                <p:outputLabel>Precio Compra</p:outputLabel>
-                <p:inputText id="tfPrecioCompra"  value="#{productoBean.precioCompra}" />
-                <p:outputLabel>Precio Venta</p:outputLabel>
-                <p:inputText id="tfPrecioVenta"  value="#{productoBean.precioVenta}" />               
-                <p:outputLabel>descripcion</p:outputLabel>
-                <p:inputText id="tfdescripcion"  value="#{productoBean.descripcion}" />
-
-                <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
-                <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
-                <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
-                <p:commandButton value ="Eliminar" action ="#{productoBean.eliminarProducto()}" update="@form"/>
-
-            </p:panelGrid>   
-
+            <p:panel header="Administracion de Peroductos">              
+                <h:panelGrid columns="4" cellpadding="3">
+                    <p:outputLabel>Codigo</p:outputLabel>
+                    <p:inputText id="tfCodigo"  value="#{productoBean.id}" />
+                    <p:outputLabel>Color</p:outputLabel>
+                    <p:selectOneMenu value="#{productoBean.idColor}" id="cbxColor" style="width:75%">
+                        <f:selectItems value="#{productoBean.colores}" var="color" itemValue="${color.id}" itemLabel="${color.descripcion}" />
+                    </p:selectOneMenu>   
+                    <p:outputLabel>Categoria</p:outputLabel>
+                    <p:selectOneMenu value="#{productoBean.idCategoria}" id="cbxCategoria" style="width:75%">
+                        <f:selectItems value="#{productoBean.categorias}" var="categoria" itemValue="${categoria.id}" itemLabel="${categoria.descripcion}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel>Marcas</p:outputLabel>
+                    <p:selectOneMenu value="#{productoBean.idMarca}" id="cbxMarca" style="width:75%">
+                        <f:selectItems value="#{productoBean.marcas}" var="marca" itemValue="${marca.id}" itemLabel="${marca.descripcion}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel>Peso</p:outputLabel>
+                    <p:inputText id="tfPeso" value="#{productoBean.peso}" />
+                    <p:outputLabel>Precio Compra</p:outputLabel>
+                    <p:inputText id="tfPrecioCompra"  value="#{productoBean.precioCompra}" />
+                    <p:outputLabel>Precio Venta</p:outputLabel>
+                    <p:inputText id="tfPrecioVenta"  value="#{productoBean.precioVenta}" />               
+                    <p:outputLabel>descripcion</p:outputLabel>
+                    <p:inputText id="tfdescripcion"  value="#{productoBean.descripcion}" />
+                </h:panelGrid>  
+            </p:panel> 
+            <p:commandButton value ="Insertar" action ="#{productoBean.crearProducto()}" update="@form"/> 
+            <p:commandButton value ="Buscar" action ="#{productoBean.buscarProducto()}" update="@form"/> 
+            <p:commandButton value ="Actualizar" action ="#{productoBean.actualizarProducto()}" update="@form"/> 
+            <p:commandButton value ="Eliminar" action ="#{productoBean.eliminarProducto()}" update="@form"/>
 
 
             <p:dataTable  var="pro" value="#{productoBean.productos}">
@@ -70,34 +58,34 @@
                     <h:outputText value="#{pro.categoriaId.descripcion}" />    
 
                 </p:column>
-                
-                
+
+
                 <p:column headerText="marca">
                     <h:outputText value="#{pro.marcaId.descripcion}" />    
 
                 </p:column>
-                
-                  
+
+
                 <p:column headerText="Peso">
                     <h:outputText value="#{pro.peso}" />    
 
                 </p:column>
-                
-                     <p:column headerText="Preciocompra">
-                         <h:outputText value="#{pro.precioCompra}" />    
+
+                <p:column headerText="Preciocompra">
+                    <h:outputText value="#{pro.precioCompra}" />    
 
                 </p:column>
 
-                
-                
-                     <p:column headerText="PrecioVenta">
-                         <h:outputText value="#{pro.precioVenta}" />    
+
+
+                <p:column headerText="PrecioVenta">
+                    <h:outputText value="#{pro.precioVenta}" />    
 
                 </p:column>
-                
-                
-                     <p:column headerText="Descripcion">
-                         <h:outputText value="#{pro.descripcion}" />    
+
+
+                <p:column headerText="Descripcion">
+                    <h:outputText value="#{pro.descripcion}" />    
 
                 </p:column>
             </p:dataTable>
