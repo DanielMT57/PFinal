@@ -11,10 +11,12 @@ import java.util.List;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.OneToMany;
+import javax.persistence.SequenceGenerator;
 import javax.persistence.Table;
 
 /**
@@ -27,6 +29,8 @@ import javax.persistence.Table;
 public class Productos implements Serializable {
     @Id
     @Column(name = "id")
+    @GeneratedValue(generator="productosSEQ")
+    @SequenceGenerator(name="productosSEQ", sequenceName="productosSEQ", allocationSize = 1)
     private int id;    
     @Column(name = "peso")
     private int peso;

@@ -72,7 +72,7 @@ public class ProductoManagedBean implements Serializable {
 
     public void crearProducto() {
         Productos p = new Productos();
-        p.setId(id);
+        //p.setId(id);
         p.setColorId(colorEJB.buscar(idColor));
         p.setCategoriaId(categoriaEJB.buscar(idCategoria));
         p.setMarcaId(marcaEJB.buscar(idMarca));
@@ -85,7 +85,6 @@ public class ProductoManagedBean implements Serializable {
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente el producto  "));
         System.out.println("ha insertado correctamente");
         limpiar();
-
     }
 
     public void buscarProducto() {
@@ -251,5 +250,5 @@ public class ProductoManagedBean implements Serializable {
         this.setDescripcion("");
 
     }
-
+    
 }
