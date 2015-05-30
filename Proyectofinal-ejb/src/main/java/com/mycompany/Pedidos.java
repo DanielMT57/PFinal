@@ -35,7 +35,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "pedidos")
 @Entity
 @Table(name = "Pedidos")
-@NamedNativeQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  * From Pedidos ", resultClass = Pedidos.class)
+@NamedQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  p From Pedidos p")
 @Inheritance(strategy=InheritanceType.JOINED)
 public class Pedidos implements Serializable {
     public static final String CONSULTA_LISTARTODOS = "Pedidos.listartodos";
@@ -44,45 +44,50 @@ public class Pedidos implements Serializable {
     @Id
     @Column(name = "Id")
     private int id;
-    @Column(name = "fecha")
-    @Temporal(TemporalType.DATE)
-    private Date fecha;
-    @Column(name = "sincronizado")
-    private Character sincronizado;
-    private String descripcion;
-    @JoinColumn(name = "estado_id", referencedColumnName = "Id")
-    @ManyToOne
-    private Estado estadoId;
     @JoinColumn(name = "afiliados_cedula", referencedColumnName = "cedula")
     @ManyToOne
     private Afiliados afiliadosCedula;
+    @JoinColumn(name = "estado_id", referencedColumnName = "Id")
+    @ManyToOne
+    private Estado estadoId;
+    @Column(name = "fecha")
+    @Temporal(TemporalType.DATE)   
+    private Date fecha;
+    @Column(name = "sincronizado")
+    private Character sincronizado;
+
+
+    
     @OneToMany(mappedBy = "pedidos")
     private List<Detallepedido> detallepedidoCollection;
 
     public Pedidos() {
     }
 
-    public Pedidos(int id, Date fecha, Character sincronizado,String descripcion, Estado estadoId, Afiliados afiliadosCedula, List<Detallepedido> detallepedidoCollection) {
-        this.id = id;
-        this.fecha = fecha;
-        this.sincronizado = sincronizado;
-        this.descripcion=descripcion;
-        this.estadoId = estadoId;
-        this.afiliadosCedula = afiliadosCedula;
-        this.detallepedidoCollection = detallepedidoCollection;
-    }
-
-    @XmlElement
     public int getId() {
         return id;
     }
 
-   
     public void setId(int id) {
         this.id = id;
     }
-    
-@XmlElement
+
+    public Afiliados getAfiliadosCedula() {
+        return afiliadosCedula;
+    }
+
+    public void setAfiliadosCedula(Afiliados afiliadosCedula) {
+        this.afiliadosCedula = afiliadosCedula;
+    }
+
+    public Estado getEstadoId() {
+        return estadoId;
+    }
+
+    public void setEstadoId(Estado estadoId) {
+        this.estadoId = estadoId;
+    }
+
     public Date getFecha() {
         return fecha;
     }
@@ -99,25 +104,6 @@ public class Pedidos implements Serializable {
         this.sincronizado = sincronizado;
     }
 
-    
-    @XmlElement
-    public Estado getEstadoId() {
-        return estadoId;
-    }
-
-    public void setEstadoId(Estado estadoId) {
-        this.estadoId = estadoId;
-    }
-
-    @XmlElement
-    public Afiliados getAfiliadosCedula() {
-        return afiliadosCedula;
-    }
-
-    public void setAfiliadosCedula(Afiliados afiliadosCedula) {
-        this.afiliadosCedula = afiliadosCedula;
-    }
-
     public List<Detallepedido> getDetallepedidoCollection() {
         return detallepedidoCollection;
     }
@@ -127,15 +113,4 @@ public class Pedidos implements Serializable {
     }
 
     
-    @XmlElement
-	public String getDescripcion() {
-		return descripcion;
-	}
-
-	public void setDescripcion(String descripcion) {
-		this.descripcion = descripcion;
-	}
-    
-    
-   
 }
