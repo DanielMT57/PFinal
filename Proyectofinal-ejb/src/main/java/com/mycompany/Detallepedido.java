@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package com.mycompany;
 
 import java.io.Serializable;
@@ -13,17 +12,17 @@ import javax.persistence.Entity;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.JoinTable;
 import javax.persistence.MapsId;
 
 /**
  *
  * @author german
- * @author  Daniel Moncada Tabares
+ * @author Daniel Moncada Tabares
  */
 @Entity
 @Table(name = "Detallepedido")
 public class Detallepedido implements Serializable {
+
     @EmbeddedId
     protected DetallepedidoPK detallepedidoPK;
     @Column(name = "cantidad")
@@ -32,16 +31,16 @@ public class Detallepedido implements Serializable {
     private double preciounitario;
     @Column(name = "sincronizado")
     private Character sincronizado;
-    
+
     @MapsId("productosId")
     @ManyToOne
     @JoinColumn(name = "productos_id", referencedColumnName = "id")
-	private Productos productos;
-    
+    private Productos productos;
+
     @MapsId("pedidosId")
     @ManyToOne
     @JoinColumn(name = "Pedidos_id", referencedColumnName = "Id")
-	private Pedidos pedidos;
+    private Pedidos pedidos;
 
     public Detallepedido() {
     }
