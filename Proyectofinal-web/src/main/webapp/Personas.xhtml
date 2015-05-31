@@ -12,6 +12,7 @@
         <br/> 
         <h:link outcome="Principal" value="Volver"/>                 
         <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Administracion de Personas">               
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>Cedula</p:outputLabel>
@@ -21,15 +22,15 @@
                         <f:selectItems value="#{personaBean.ciudades}" var="ciudad" itemValue="${ciudad.id}" itemLabel="${ciudad.descripcion}" />
                     </p:selectOneMenu>  
                     <p:outputLabel>Telefono</p:outputLabel>
-                    <p:inputText id="tfTelefono" required="true" value="#{personaBean.telefono}" />
+                    <p:inputText id="tfTelefono"  value="#{personaBean.telefono}" />
                     <p:outputLabel>Nombre</p:outputLabel>
-                    <p:inputText id="tfNombre" required="true" value="#{personaBean.nombre}" />
+                    <p:inputText id="tfNombre" value="#{personaBean.nombre}" />
                     <p:outputLabel>Apellido</p:outputLabel>
-                    <p:inputText id="tfApellido" required="true" value="#{personaBean.apellido}" />
+                    <p:inputText id="tfApellido" value="#{personaBean.apellido}" />
                     <p:outputLabel>Direccion</p:outputLabel>
-                    <p:inputText id="tfDireccion" required="true" value="#{personaBean.direccion}" />
+                    <p:inputText id="tfDireccion"  value="#{personaBean.direccion}" />
                     <p:outputLabel>EMail</p:outputLabel>
-                    <p:inputText id="tfEMail" required="true" value="#{personaBean.email}" />
+                    <p:inputText id="tfEMail"  value="#{personaBean.email}" />
                     <br></br>
                 </h:panelGrid>
             </p:panel>
@@ -47,8 +48,8 @@
             </p:panel>
             <p:row>
                 <p:commandButton value="Insertar" actionListener="#{personaBean.crearPersonas()}" ajax="false"/>
-                <p:commandButton value="Buscar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
-                <p:commandButton value="Actualizar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
+                <p:commandButton value="Buscar" actionListener="#{personaBean.buscarPersona()}" ajax="false" />
+                <p:commandButton value="Actualizar" actionListener="#{personaBean.actualizarPersona()}" ajax="false" />
             </p:row>
         </h:form> 
     </h:body>
