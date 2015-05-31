@@ -16,17 +16,17 @@
             <p:panel header="Administracion de Productos">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>Id Pedido</p:outputLabel>
-                    <p:inputText id="tfIdPedido"  value="" />
-                    <p:outputLabel>Cedula del Afiliado</p:outputLabel>
-                    <p:selectOneMenu value="" id="cbxCedulaAfiliado" style="width:75%">
-                        <f:selectItems value="" var="cedAfiliado" itemValue="" itemLabel="" />
+                    <p:inputText id="tfIdPedido"  value="#{pedidoManagedBean.idPedido}" />
+                    <p:outputLabel>Afiliado</p:outputLabel>
+                    <p:selectOneMenu value="#{pedidoManagedBean.idAfiliado}" id="cbxCedulaAfiliado" style="width:75%">
+                        <f:selectItems value="#{pedidoManagedBean.afiliados}" var="ced" itemValue="${ced.cedula}" itemLabel="${ced.nombre}" />
                     </p:selectOneMenu>   
                     <p:outputLabel>Estado</p:outputLabel>
-                    <p:selectOneMenu value="" id="cbxEstado" style="width:75%">
-                        <f:selectItems value="" var="estado" itemValue="" itemLabel="" />
+                    <p:selectOneMenu value="#{pedidoManagedBean.idestado}" id="cbxEstado" style="width:75%">
+                        <f:selectItems value="#{pedidoManagedBean.estados}" var="estado" itemValue="${estado.id}" itemLabel="${estado.descripcion}" />
                     </p:selectOneMenu>
-                    <p:outputLabel>Fecha</p:outputLabel>
-                    <p:inputText id="tfFecha" value="" />
+                       <p:outputLabel for="mask" value="Fecha :" />
+                       <p:calendar id="mask" value="#{pedidoManagedBean.fecha}" pattern="dd-MM-yyyy"  />
                     <p:outputLabel>Descripcion</p:outputLabel>
                     <p:inputText id="tfDescripcion"  value="" />
                 </h:panelGrid> 
@@ -35,16 +35,18 @@
             <p:panel header="Detalles del pedido ">       
                 <h:panelGrid columns="2" cellpadding="3">
 
-                    <p:outputLabel>Id del Producto</p:outputLabel>
-                    <p:selectOneMenu value="" id="cbxIdProducto" style="width:75%">
-                        <f:selectItems value="" var="niveles" itemValue="" itemLabel="" />
+                    <p:outputLabel>Producto</p:outputLabel>
+                    <p:selectOneMenu value="#{pedidoManagedBean.idProducto}" id="cbxIdProducto" style="width:75%">
+                        <f:selectItems value="#{pedidoManagedBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
                     </p:selectOneMenu>  
 
                     <p:outputLabel>Cantidad</p:outputLabel>
-                    <p:inputText id="tfCantidad" required="true" value="" />
+                    <p:inputText id="tfCantidad" required="true" value="#{pedidoManagedBean.cantidad}" />
 
                     <p:outputLabel>Precio Unitario</p:outputLabel>
-                    <p:inputText id="tfPrecioUnitario" required="true" value="" />
+                    <p:inputText id="tfPrecioUnitario" required="true" value="#{pedidoManagedBean.precioUnitario}" />
+                                  
+ 
                 </h:panelGrid>
             </p:panel>       
             <p:panelGrid columns="4">       
