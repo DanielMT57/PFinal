@@ -6,17 +6,25 @@
 package com.mycompany.managedbeans;
 
 import com.mycompany.Afiliados;
+
 import com.mycompany.Estado;
+import com.mycompany.Pedidos;
+import com.mycompany.Detallepedido;
 import com.mycompany.Productos;
 import com.mycompany.sessionbeans.AfiliadoEJB;
 import com.mycompany.sessionbeans.estadoEJB;
 import com.mycompany.sessionbeans.ProductoEJB;
+import com.mycompany.sessionbeans.PedidoEJB;
+import com.mycompany.sessionbeans.detallePedidoEJB;
+
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
 import javax.inject.Named;
 
 import javax.faces.view.ViewScoped;
@@ -28,7 +36,7 @@ import javax.faces.view.ViewScoped;
 @ManagedBean
 @Named(value = "pedidoManagedBean")
 @ViewScoped
-public class pedidoManagedBean implements Serializable{
+public class pedidoManagedBean implements Serializable {
 
     private int idPedido;
     private int idAfiliado;
@@ -37,7 +45,7 @@ public class pedidoManagedBean implements Serializable{
     private List<Estado> estados;
     private Date fecha;
     private String descripcion;
-    
+
     private int ide;
 
     ////
@@ -55,6 +63,12 @@ public class pedidoManagedBean implements Serializable{
     @EJB
     private estadoEJB estadoEJB;
 
+    @EJB
+    private PedidoEJB pedidoEJB;
+
+    @EJB
+    private detallePedidoEJB detallepedidoEJB;
+
     public int getIde() {
         return ide;
     }
@@ -63,9 +77,6 @@ public class pedidoManagedBean implements Serializable{
         this.ide = ide;
     }
 
-    
-    
-        
     public int getIdPedido() {
         return idPedido;
     }
@@ -128,8 +139,6 @@ public class pedidoManagedBean implements Serializable{
         afiliados = afiliadosEJB.listarTodos();
         estados = estadoEJB.listarTodos();
         productos = productoEJB.listarTodos();
-         
-      
 
     }
 
@@ -141,12 +150,12 @@ public class pedidoManagedBean implements Serializable{
         this.idProducto = idProducto;
     }
 
-    public double getPrecioUnitario() {                
+    public double getPrecioUnitario() {
         return precioUnitario;
     }
 
-    public void setPrecioUnitario(double precioUnitario) {        
- 
+    public void setPrecioUnitario(double precioUnitario) {
+
         this.precioUnitario = precioUnitario;
     }
 
@@ -165,17 +174,74 @@ public class pedidoManagedBean implements Serializable{
     public void setProductos(List<Productos> productos) {
         this.productos = productos;
     }
-    
-    public void cargar (){
-    Productos p = productoEJB.buscar(idProducto);
-    double precio = p.getPrecioVenta();
-   this.setPrecioUnitario(precio);
+
+    public void cargar() {
+        Productos p = productoEJB.buscar(idProducto);
+        double precio = p.getPrecioVenta();
+        this.setPrecioUnitario(precio);
     }
 
-    public void actualizar(){
-        Productos p=productoEJB.buscar(idProducto);
-        precioUnitario=p.getPrecioVenta();
+    public void actualizar() {
+        Productos p = productoEJB.buscar(idProducto);
+        precioUnitario = p.getPrecioVenta();
     }
-    
-    
+
+    public void crearPedidos() {
+
+        Pedidos pe = new Pedidos();
+        pe.setId(idPedido);
+
+        pe.setAfiliadosCedula(afiliadosEJB.buscar(idAfiliado));
+        pe.setEstadoId(estadoEJB.buscar(idestado));
+        pe.setFecha(fecha);
+        pe.setSincronizado('0');
+        pe.setDescripcion(descripcion);
+
+        pedidoEJB.crear(pe);
+        Detallepedido de = new Detallepedido();
+        // de.setDetallepedidoPK(idPedido, idProducto);
+        de.setPedidos(pedidoEJB.buscar(idPedido));
+        de.setProductos(productoEJB.buscar(idProducto));
+        de.setCantidad(cantidad);
+        de.setPreciounitario(precioUnitario);
+        de.setSincronizado('0');
+        detallepedidoEJB.crear(de);
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente  "));
+        System.out.println("ha insertado correctamente");
+        limpiar();
+
+    }
+
+    public void buscarPedido() {
+        Pedidos pe = pedidoEJB.buscar(idPedido);
+        int id=pe.getId();
+        Detallepedido de = detallepedidoEJB.buscar(id);
+        if (pe != null) {
+          
+            descripcion = pe.getDescripcion();
+            idAfiliado = pe.getAfiliadosCedula().getCedula();
+            idestado = pe.getEstadoId().getId();
+            idProducto = de.getProductos().getId();
+            cantidad = de.getCantidad();
+            precioUnitario = de.getPreciounitario();
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
+        }
+
+        System.out.println("ha encontrado  correctamente");
+        //   limpiar ();
+
+    }
+
+    public void limpiar() {
+        this.setIdPedido(0);
+        this.setCantidad(0);
+        this.setDescripcion(null);
+        this.setFecha(null);
+        this.setPrecioUnitario(0);
+    }
+
 }
