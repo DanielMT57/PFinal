@@ -47,7 +47,7 @@ public class ServicioPedidoResource {
      * @return an instance of java.lang.String
      */
     @GET
-    @Produces("application/json")
+   @Produces("application/json")
     public List<Pedidos> listarPedidos(){
        
         return pe.listarPedidos();
