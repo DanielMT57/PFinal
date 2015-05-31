@@ -242,6 +242,15 @@ public class PersonaManagedBean implements Serializable {
         limpiar();
 
     }
+    
+     private List<Personas> personas;
+
+    public List<Personas> getPersonas() {
+       personas= personasEJB.listarTodos();
+        return personas;
+    }
+     
+     
 
     private void limpiar() {
 

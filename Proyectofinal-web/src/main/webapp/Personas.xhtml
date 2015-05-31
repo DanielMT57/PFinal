@@ -6,7 +6,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:p="http://primefaces.org/ui">
     <h:head>
-        <title>Productos</title>
+        <title>Personas</title>
     </h:head>
     <h:body>
         <br/> 
@@ -51,6 +51,49 @@
                 <p:commandButton value="Buscar" actionListener="#{personaBean.buscarPersona()}" ajax="false" />
                 <p:commandButton value="Actualizar" actionListener="#{personaBean.actualizarPersona()}" ajax="false" />
             </p:row>
+
+
+            <p:dataTable  var="per" value="#{personaBean.personas}">
+                <p:column headerText="ced">
+                    <h:outputText value="#{per.cedula}" />
+                </p:column>
+
+                <p:column headerText="Ciudad">
+                    <h:outputText value="#{per.ciudadesId.descripcion}" />      
+                </p:column>
+
+
+                <p:column headerText="telefono">
+                    <h:outputText value="#{per.telefono}" />    
+
+                </p:column>
+
+
+                <p:column headerText="Nombre">
+                    <h:outputText value="#{per.nombre}" />    
+
+                </p:column>
+
+
+                <p:column headerText="Apellido">
+                    <h:outputText value="#{per.apellidos}" />    
+
+                </p:column>
+
+                <p:column headerText="Direccion">
+                    <h:outputText value="#{per.direccion}" />    
+
+                </p:column>
+
+
+
+                <p:column headerText="Email">
+                    <h:outputText value="#{per.email}" />    
+
+                </p:column>
+
+
+            </p:dataTable>
         </h:form> 
     </h:body>
 </html>
