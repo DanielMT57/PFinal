@@ -36,7 +36,7 @@ public class Promociones implements Serializable {
     @Temporal(TemporalType.DATE)
     private Date fechafin;
     @Column(name = "descuento")
-    private Short descuento;
+    private int descuento;
     @Column(name = "preciofinal")
     private int preciofinal;
     @ManyToOne
@@ -48,15 +48,6 @@ public class Promociones implements Serializable {
     public Promociones() {
     }
 
-    public Promociones(int id, String descripcion, Date fechafin, Short descuento, int preciofinal, Productos productosId, List<Areaspagina> areaspaginaCollection) {
-        this.id = id;
-        this.descripcion = descripcion;
-        this.fechafin = fechafin;
-        this.descuento = descuento;
-        this.preciofinal = preciofinal;
-        this.productosId = productosId;
-        this.areaspaginaCollection = areaspaginaCollection;
-    }
 
     public int getId() {
         return id;
@@ -82,9 +73,7 @@ public class Promociones implements Serializable {
         this.fechafin = fechafin;
     }
 
-    public Short getDescuento() {
-        return descuento;
-    }
+ 
 
     public void setDescuento(Short descuento) {
         this.descuento = descuento;
@@ -113,4 +102,14 @@ public class Promociones implements Serializable {
     public void setAreaspaginaCollection(List<Areaspagina> areaspaginaCollection) {
         this.areaspaginaCollection = areaspaginaCollection;
     }   
+
+    public int getDescuento() {
+        return descuento;
+    }
+
+    public void setDescuento(int descuento) {
+        this.descuento = descuento;
+    }
+    
+    
 }

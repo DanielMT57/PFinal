@@ -12,10 +12,31 @@
         <br />
         <h:form>
             Administracion de Promociones 
-            <p:panelGrid columns="2">
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:panel header="Administracion de Productos">              
+                <h:panelGrid columns="4" cellpadding="3">
+                    <p:outputLabel>id</p:outputLabel>
+                    <p:inputText id="tfCodigo"  value="#{promocionesManagedBean.id}" />
+                    <p:outputLabel>productos</p:outputLabel>
+                    <p:selectOneMenu value="#{promocionesManagedBean.productosId}" id="cbxproductos" style="width:75%">
+                        <f:selectItems value="#{promocionesManagedBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
+                        <p:ajax update="@form" listener="#{promocionesManagedBean.actualizar()}"/>
+                    </p:selectOneMenu>  
+                    <p:outputLabel>descripcion</p:outputLabel>
+                    <p:inputText id="tfdescripcion"  value="#{promocionesManagedBean.descripcion}" />
 
-                
-            </p:panelGrid>
+                    <p:outputLabel for="mask2" value="Fecha Fin:" />
+                    <p:calendar id="mask2" value="#{promocionesManagedBean.fechafin}" pattern="dd-MM-yyyy"  />
+
+                    <p:outputLabel>Descuento</p:outputLabel>
+                    <p:inputText id="tfdescuento"  value="#{promocionesManagedBean.descuento}" />
+
+                    <p:outputLabel>Precio Final</p:outputLabel>
+                    <p:inputText id="tfprecio"  value="#{promocionesManagedBean.preciofinal}" />
+                    
+                    <p:commandButton value="Insertar" actionListener="#{promocionesManagedBean.crearPromociones()}" ajax="false"/>
+                </h:panelGrid>  
+            </p:panel> 
         </h:form>
     </h:body>
 </html>
