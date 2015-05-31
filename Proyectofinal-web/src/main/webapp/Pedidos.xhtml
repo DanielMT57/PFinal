@@ -28,7 +28,7 @@
                        <p:outputLabel for="mask" value="Fecha :" />
                        <p:calendar id="mask" value="#{pedidoManagedBean.fecha}" pattern="dd-MM-yyyy"  />
                     <p:outputLabel>Descripcion</p:outputLabel>
-                    <p:inputText id="tfDescripcion"  value="" />
+                    <p:inputText id="tfDescripcion"  value="#{pedidoManagedBean.descripcion}" />
                 </h:panelGrid> 
             </p:panel>
                       
@@ -52,8 +52,8 @@
             </p:panel>       
             <p:panelGrid columns="4">       
                 <p:row>
-                    <p:commandButton value="Insertar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false"/>
-                    <p:commandButton value="Buscar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
+                    <p:commandButton value="Insertar" actionListener="#{pedidoManagedBean.crearPedidos()}" ajax="false"/>
+                    <p:commandButton value="Buscar" actionListener="#{pedidoManagedBean.buscarPedido()}" ajax="false" />
                     <p:commandButton value="Actualizar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
                 </p:row>
             </p:panelGrid>                 
