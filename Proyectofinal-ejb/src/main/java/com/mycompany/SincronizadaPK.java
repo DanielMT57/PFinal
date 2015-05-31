@@ -18,9 +18,9 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class SincronizadaPK implements Serializable {
     
-    @Column(name = "personas_cedula")
+    @Column(name = "afiliados_cedula")
     private int personasCedula;
-    @Column(name = "tablassincronizada_id")
+    @Column(name = "nombretabla")
     private String tablassincronizadaId;
 
     public SincronizadaPK() {

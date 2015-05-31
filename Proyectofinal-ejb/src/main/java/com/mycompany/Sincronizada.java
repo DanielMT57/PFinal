@@ -33,7 +33,7 @@ public class Sincronizada implements Serializable {
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @MapsId("personasCedula")
-    @JoinColumn(name = "personas_cedula", referencedColumnName = "cedula")
+    @JoinColumn(name = "afiliados_cedula", referencedColumnName = "cedula")
     @ManyToOne
     private Personas personas;
 

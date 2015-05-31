@@ -43,7 +43,7 @@ public class Afiliados extends Personas {
 //    @JoinColumn(name = "personas_cedula", referencedColumnName = "cedula")
 //	private Personas personas;
     @OneToOne
-    @JoinColumn(name = "Afiliados_cedula", referencedColumnName = "cedula")
+    @JoinColumn(name = "Afiliado", referencedColumnName = "cedula")
 	private Afiliados afiliadosCollection;
     @ManyToOne
     @JoinColumn(name="niveles_id", referencedColumnName = "id")
