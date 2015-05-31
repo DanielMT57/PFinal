@@ -223,16 +223,19 @@ public class PersonaManagedBean implements Serializable {
     }
 
     public void actualizarPersona() {
-        Personas p = new Personas();
-        p.setCedula(cedula);
-        p.setCiudadesId(ciudadesEJB.buscar(idCiudades));
-        p.setNombre(nombre);
-        p.setApellidos(apellido);
-        p.setDireccion(direccion);
-        p.setEmail(email);
-        p.setTelefono(telefono);
-        Afiliados af = new Afiliados(fechaAfiliacion, '0', nivelesEJB.buscar(idNiveles), cedula, telefono, nombre, apellido, direccion, ciudadesEJB.buscar(idCiudades), email);
-        afiliadosEJB.editar(af);
+        Afiliados a= afiliadosEJB.buscar(cedula);
+        a.setCedula(cedula);
+        a.setCiudadesId(ciudadesEJB.buscar(idCiudades));
+        a.setNombre(nombre);
+        a.setApellidos(apellido);
+        a.setDireccion(direccion);
+        a.setEmail(email);
+        a.setTelefono(telefono);
+        idNiveles = a.getNivel().getId();
+        fechaAfiliacion = a.getFechaafiliacion();
+        a.setNivel(nivelesEJB.buscar(idNiveles));
+        a.setFechaafiliacion(fechaAfiliacion);
+        afiliadosEJB.editar(a);
 
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha actualizado correctamente  "));
         // System.out.println("ha actualizado correctamente");
