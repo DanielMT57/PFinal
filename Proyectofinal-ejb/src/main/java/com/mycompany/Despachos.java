@@ -28,8 +28,11 @@ import javax.persistence.PrimaryKeyJoinColumn;
 @PrimaryKeyJoinColumn(name = "Id", referencedColumnName = "Id")
 
 //@PrimaryKeyJoinColumn(name = "pedidos_id", referencedColumnName = "Id")
-public class Despachos extends Pedidos implements Serializable {
+public class Despachos implements Serializable  {
     
+    @Id
+    @Column(name = "Id")
+    private int id;
     @Column(name = "feha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
@@ -41,7 +44,8 @@ public class Despachos extends Pedidos implements Serializable {
     public Despachos() {
     }
 
-    public Despachos( Date fecha, double valor, Character sincronizado) {
+    public Despachos(Date fecha, double valor, Character sincronizado,int id) {
+        this.id=id;
         this.fecha = fecha;
         this.valor = valor;
         this.sincronizado = sincronizado;
@@ -71,4 +75,13 @@ public class Despachos extends Pedidos implements Serializable {
     public void setSincronizado(Character sincronizado) {
         this.sincronizado = sincronizado;
     } 
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
 }

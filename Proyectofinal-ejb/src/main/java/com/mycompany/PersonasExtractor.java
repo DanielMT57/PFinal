@@ -15,7 +15,7 @@ public class PersonasExtractor extends ClassExtractor {
 
     @Override
     public Class extractClassFromRow(Record record, Session sn) {
-        if(record.containsKey("Afiliado")){
+        if(record.containsKey("fechaafiliacion")){
             return Afiliados.class;
         }else{
             return Personas.class;

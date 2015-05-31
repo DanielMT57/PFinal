@@ -27,6 +27,7 @@ import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
+import org.eclipse.persistence.annotations.ClassExtractor;
 
 /**
  *
@@ -36,7 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @Entity
 @Table(name = "Pedidos")
 @NamedQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  p From Pedidos p")
-@Inheritance(strategy=InheritanceType.JOINED)
 public class Pedidos implements Serializable {
     public static final String CONSULTA_LISTARTODOS = "Pedidos.listartodos";
     
@@ -55,14 +55,22 @@ public class Pedidos implements Serializable {
     private Date fecha;
     @Column(name = "sincronizado")
     private Character sincronizado;
+    
+    private String descripcion;
 
+    public Pedidos(int id) {
+        this.id = id;
+    }
 
+    public Pedidos() {
+    }
+
+    
     
     @OneToMany(mappedBy = "pedidos")
     private List<Detallepedido> detallepedidoCollection;
 
-    public Pedidos() {
-    }
+    
 
     public int getId() {
         return id;
@@ -112,5 +120,14 @@ public class Pedidos implements Serializable {
         this.detallepedidoCollection = detallepedidoCollection;
     }
 
+    public String getDescripcion() {
+        return descripcion;
+    }
+
+    public void setDescripcion(String descripcion) {
+        this.descripcion = descripcion;
+    }
+
+    
     
 }
