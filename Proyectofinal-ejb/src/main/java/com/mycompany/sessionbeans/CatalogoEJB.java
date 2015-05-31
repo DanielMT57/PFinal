@@ -8,7 +8,7 @@ package com.mycompany.sessionbeans;
 import com.mycompany.Catalogo;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import com.mycompany.Afiliados_;
+
 
 /**
  *

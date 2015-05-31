@@ -12,7 +12,7 @@
         <br/> 
         <h:link outcome="Principal" value="Volver"/>         
         <h:form>            
-             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Administracion de Productos">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>Id Pedido</p:outputLabel>
@@ -25,13 +25,13 @@
                     <p:selectOneMenu value="#{pedidoManagedBean.idestado}" id="cbxEstado" style="width:75%">
                         <f:selectItems value="#{pedidoManagedBean.estados}" var="estado" itemValue="${estado.id}" itemLabel="${estado.descripcion}" />
                     </p:selectOneMenu>
-                       <p:outputLabel for="mask" value="Fecha :" />
-                       <p:calendar id="mask" value="#{pedidoManagedBean.fecha}" pattern="dd-MM-yyyy"  />
+                    <p:outputLabel for="mask" value="Fecha :" />
+                    <p:calendar id="mask" value="#{pedidoManagedBean.fecha}" pattern="dd-MM-yyyy"  />
                     <p:outputLabel>Descripcion</p:outputLabel>
                     <p:inputText id="tfDescripcion"  value="#{pedidoManagedBean.descripcion}" />
                 </h:panelGrid> 
             </p:panel>
-                      
+
             <p:panel header="Detalles del pedido ">       
                 <h:panelGrid columns="2" cellpadding="3">
 
@@ -46,17 +46,54 @@
 
                     <p:outputLabel>Precio Unitario</p:outputLabel>
                     <p:inputText id="tfPrecioUnitario" required="true" value="#{pedidoManagedBean.precioUnitario}" />
-                                  
- 
+
+
                 </h:panelGrid>
             </p:panel>       
             <p:panelGrid columns="4">       
                 <p:row>
                     <p:commandButton value="Insertar" actionListener="#{pedidoManagedBean.crearPedidos()}" ajax="false"/>
                     <p:commandButton value="Buscar" actionListener="#{pedidoManagedBean.buscarPedido()}" ajax="false" />
-                    <p:commandButton value="Actualizar" actionListener="#{catalogoBean.crearCatalogo()}" ajax="false" />
+                    <p:commandButton value="Actualizar" actionListener="#{pedidoManagedBean.actualizarPedido()}" ajax="false" />
                 </p:row>
-            </p:panelGrid>                 
+            </p:panelGrid> 
+         <p:commandButton value="Ver Detalles" action="Detalles?faces-redirect=true" />
+
+
         </h:form> 
+
+
+        <h:form>
+
+            <p:dataTable  var="pe" value="#{pedidoManagedBean.pedidos}">
+                <p:column headerText="Pedido_id">
+                    <h:outputText value="#{pe.id}" />
+                </p:column>
+
+                <p:column headerText="Afiliado">
+                    <h:outputText value="#{pe.afiliadosCedula.nombre}" />      
+                </p:column>
+
+
+                <p:column headerText="Estado">
+                    <h:outputText value="#{pe.estadoId.descripcion}" />    
+
+                </p:column>
+
+                <p:column headerText="Fecha">
+                    <h:outputText value="#{pe.fecha}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>   
+                </p:column>
+
+                <p:column headerText="Descripcion">
+                    <h:outputText value="#{pe.descripcion}" />    
+
+                </p:column>
+
+
+            </p:dataTable> 
+
+        </h:form>
     </h:body>
 </html>

@@ -175,6 +175,20 @@ public class pedidoManagedBean implements Serializable {
         this.productos = productos;
     }
 
+    private List<Detallepedido> detalles;
+     private List<Pedidos> pedidos;
+
+    public List<Pedidos> getPedidos() {
+        pedidos=pedidoEJB.listarTodos();
+        return pedidos;
+    }
+     
+
+    public List<Detallepedido> getDetalles() {
+        detalles = detallepedidoEJB.listarTodos();
+        return detalles;
+    }
+
     public void cargar() {
         Productos p = productoEJB.buscar(idProducto);
         double precio = p.getPrecioVenta();
@@ -225,6 +239,7 @@ public class pedidoManagedBean implements Serializable {
             descripcion = pe.getDescripcion();
             idAfiliado = pe.getAfiliadosCedula().getCedula();
             idestado = pe.getEstadoId().getId();
+            fecha = pe.getFecha();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
         } else {
@@ -233,6 +248,34 @@ public class pedidoManagedBean implements Serializable {
         System.out.println("ha encontrado  correctamente");
         //   limpiar ();
 
+    }
+    
+    
+      public void actualizarPedido() {
+          
+           Pedidos pe = new Pedidos();
+        pe.setId(idPedido);
+
+        pe.setAfiliadosCedula(afiliadosEJB.buscar(idAfiliado));
+        pe.setEstadoId(estadoEJB.buscar(idestado));
+        pe.setFecha(fecha);
+        pe.setSincronizado('0');
+        pe.setDescripcion(descripcion);
+
+        pedidoEJB.editar(pe);
+        Detallepedido de = new Detallepedido();
+        // de.setDetallepedidoPK(idPedido, idProducto);
+        de.setPedidos(pedidoEJB.buscar(idPedido));
+        de.setProductos(productoEJB.buscar(idProducto));
+        de.setCantidad(cantidad);
+        de.setPreciounitario(precioUnitario);
+        de.setSincronizado('0');
+        detallepedidoEJB.editar(de);
+
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha actualizado correctamente  "));
+        System.out.println("ha actualizado correctamente");
+        limpiar();
+      
     }
 
     public void limpiar() {
