@@ -50,7 +50,7 @@ public class ServicioPedidoResource {
    @Produces("application/json")
     public List<Pedidos> listarPedidos(){
        
-        return pe.listarPedidos();
+       return pe.listarPedidos();
        
     }
 
