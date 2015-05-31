@@ -11,6 +11,7 @@ import com.mycompany.Productos;
 import com.mycompany.sessionbeans.AfiliadoEJB;
 import com.mycompany.sessionbeans.estadoEJB;
 import com.mycompany.sessionbeans.ProductoEJB;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 import javax.annotation.ManagedBean;
@@ -27,8 +28,7 @@ import javax.faces.view.ViewScoped;
 @ManagedBean
 @Named(value = "pedidoManagedBean")
 @ViewScoped
-
-public class pedidoManagedBean {
+public class pedidoManagedBean implements Serializable{
 
     private int idPedido;
     private int idAfiliado;
@@ -172,6 +172,10 @@ public class pedidoManagedBean {
    this.setPrecioUnitario(precio);
     }
 
+    public void actualizar(){
+        Productos p=productoEJB.buscar(idProducto);
+        precioUnitario=p.getPrecioVenta();
+    }
     
     
 }

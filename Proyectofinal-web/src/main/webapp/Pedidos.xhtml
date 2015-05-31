@@ -36,8 +36,9 @@
                 <h:panelGrid columns="2" cellpadding="3">
 
                     <p:outputLabel>Producto</p:outputLabel>
-                    <p:selectOneMenu value="#{pedidoManagedBean.idProducto}" id="cbxIdProducto" style="width:75%">
+                    <p:selectOneMenu value="#{pedidoManagedBean.idProducto}" id="cbxIdProducto" style="width:75%" >
                         <f:selectItems value="#{pedidoManagedBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
+                        <p:ajax update="@form" listener="#{pedidoManagedBean.actualizar()}"/>
                     </p:selectOneMenu>  
 
                     <p:outputLabel>Cantidad</p:outputLabel>
