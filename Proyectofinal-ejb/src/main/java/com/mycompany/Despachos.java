@@ -31,9 +31,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
 public class Despachos implements Serializable  {
     
     @Id
-    @Column(name = "Id")
+    @Column(name = "Pedidos_id")
     private int id;
-    @Column(name = "feha")
+    @Column(name = "fecha")
     @Temporal(TemporalType.TIMESTAMP)
     private Date fecha;
     @Column(name = "valor")
