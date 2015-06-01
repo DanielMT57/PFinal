@@ -12,48 +12,52 @@
         <br/> 
         <h:link outcome="Catalogo" value="Volver a Catalogo"/>          
         <h:form>
+
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Administracion de Paginas">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>Id</p:outputLabel>
                     <p:inputText id="tfId" required="true" value="#{paginaBean.idpagina}" />
-               
-                <p:outputLabel>Categoria</p:outputLabel>
-                <p:selectOneMenu value="#{paginaBean.categoriaID}" id="cbxcate" style="width:75%">
-                    <f:selectItems value="#{paginaBean.categorias}" var="cate" itemValue="${cate.id}" itemLabel="${cate.descripcion}" />
+
+                    <p:outputLabel>Categoria</p:outputLabel>
+                    <p:selectOneMenu value="#{paginaBean.categoriaID}" id="cbxcate" style="width:75%">
+                        <f:selectItems value="#{paginaBean.categorias}" var="cate" itemValue="${cate.id}" itemLabel="${cate.descripcion}" />
                     </p:selectOneMenu>
-                
-                  <p:outputLabel>Catalogos</p:outputLabel>
-                  <p:selectOneMenu value="#{paginaBean.catalogoID}" id="cbxcata" style="width:75%">
-                      <f:selectItems value="#{paginaBean.catalogos}" var="cata" itemValue="${cata.id}" itemLabel="${cata.id}" />
+
+                    <p:outputLabel>Catalogos</p:outputLabel>
+                    <p:selectOneMenu value="#{paginaBean.catalogoID}" id="cbxcata" style="width:75%">
+                        <f:selectItems value="#{paginaBean.catalogos}" var="cata" itemValue="${cata.id}" itemLabel="${cata.id}" />
                     </p:selectOneMenu>
                     <p:outputLabel>Numero</p:outputLabel>
                     <p:inputText id="tfnumero"  value="#{paginaBean.numero}" />
-                 
-                    <p:commandButton value="Crear Areas" action="Areas?faces-redirect=true" />
+
+
                 </h:panelGrid>
+
             </p:panel> 
             <p:row>
                 <p:commandButton value="Insertar" action="#{paginaBean.crearPaginas()}" update="@form"/>
                 <p:commandButton value="Buscar" action="#{paginaBean.buscarPagina()}" update="@form" />
                 <p:commandButton value="Actualizar" action="#{paginaBean.editarPaginas()}" update="@form" />
                 <p:commandButton value="Eliminar" action="#{paginaBean.eliminarPagina()}" update="@form" />
+
+                <p:commandButton value="Crear Areas" action="Areas?faces-redirect=true" />
             </p:row>
             <p:dataTable  var="pa" value="#{paginaBean.paginas}">
                 <p:column headerText="id">
                     <h:outputText value="#{pa.id}" />
                 </p:column>
-             
-             
+
+
                 <p:column headerText="Categoria">
                     <h:outputText value="#{pa.categoriaId.descripcion}" />    
                 </p:column>
                 <p:column headerText="Numero catalogo">
                     <h:outputText value="#{pa.catalogoId.id}" />    
                 </p:column>
-                
-                   <p:column headerText="Numero  Paginas">
-                       <h:outputText value="#{pa.numero}" />    
+
+                <p:column headerText="Numero  Paginas">
+                    <h:outputText value="#{pa.numero}" />    
                 </p:column>
             </p:dataTable>
 

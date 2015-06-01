@@ -10,56 +10,58 @@
     </h:head>
     <h:body>
         <br/> 
-        <h:link outcome="Pagina" value="Volver"/>          
+        <h:link outcome="Pagina" value="Volver a pagina"/>  
+      
         <h:form>
+               <h:link outcome="Principal" value="Volver a Principal"/>  
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Administracion de Areas de pagina">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>Id</p:outputLabel>
                     <p:inputText id="tfId" required="true" value="#{areasBean.id}" />
-               
-                <p:outputLabel>Pagina</p:outputLabel>
-                <p:selectOneMenu value="#{areasBean.paginasId}" id="cbxarea" style="width:75%">
-                    <f:selectItems value="#{areasBean.paginas}" var="ar" itemValue="${ar.id}" itemLabel="${ar.numero}" />
+
+                    <p:outputLabel>Pagina</p:outputLabel>
+                    <p:selectOneMenu value="#{areasBean.paginasId}" id="cbxarea" >
+                        <f:selectItems value="#{areasBean.paginas}" var="ar" itemValue="${ar.id}" itemLabel="${ar.id}" />
                     </p:selectOneMenu>
-                
-                  <p:outputLabel>Productos</p:outputLabel>
-                  <p:selectOneMenu value="#{areasBean.productosId}" id="cbxpro" style="width:80%">
-                      <f:selectItems value="#{areasBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
+
+                    <p:outputLabel>Productos</p:outputLabel>
+                    <p:selectOneMenu value="#{areasBean.productosId}" id="cbxpro" >
+                        <f:selectItems value="#{areasBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
                     </p:selectOneMenu>
-                  
+
                     <p:outputLabel>Promociones</p:outputLabel>
-                   <p:selectOneMenu value="#{areasBean.promocionesId}" id="cbxpromo" style="width:80%">
-                       <f:selectItems value="#{areasBean.promociones}" var="promo" itemValue="${promo.id}" itemLabel="${promo.descripcion}" />
+                    <p:selectOneMenu value="#{areasBean.promocionesId}" id="cbxpromo">
+                        <f:selectItems value="#{areasBean.promociones}" var="promo" itemValue="${promo.id}" itemLabel="${promo.descripcion}" />
                     </p:selectOneMenu>
-                  
-            
-             
-                 
-                  
+
+
+
+
+
                 </h:panelGrid>
             </p:panel> 
             <p:row>
-                <p:commandButton value="Insertar" action="#{paginaBean.crearPaginas()}" update="@form"/>
-                <p:commandButton value="Buscar" action="#{paginaBean.buscarPagina()}" update="@form" />
-                <p:commandButton value="Actualizar" action="#{paginaBean.editarPaginas()}" update="@form" />
-                <p:commandButton value="Eliminar" action="#{paginaBean.eliminarPagina()}" update="@form" />
+                <p:commandButton value="Insertar" action="#{areasBean.crearAreas()}" update="@form"/>
+                <p:commandButton value="Buscar" action="#{areasBean.buscarArea()}" update="@form" />
+                <p:commandButton value="Actualizar" action="#{areasBean.editarAreas()}" update="@form" />
+                <p:commandButton value="Eliminar" action="#{areasBean.eliminarArea()}" update="@form" />
             </p:row>
-            <p:dataTable  var="pa" value="#{paginaBean.paginas}">
+            <p:dataTable  var="ar" value="#{areasBean.areas}">
                 <p:column headerText="id">
-                    <h:outputText value="#{pa.id}" />
+                    <h:outputText value="#{ar.id}" />
                 </p:column>
-             
-             
-                <p:column headerText="Categoria">
-                    <h:outputText value="#{pa.categoriaId.descripcion}" />    
+
+
+                <p:column headerText="Pagina">
+                    <h:outputText value="#{ar.paginasId.id}" />    
                 </p:column>
-                <p:column headerText="Numero catalogo">
-                    <h:outputText value="#{pa.catalogoId.id}" />    
+                <p:column headerText="Producto">
+                    <h:outputText value="#{ar.productosId.descripcion}" />    
                 </p:column>
-                
-                   <p:column headerText="Numero  Paginas">
-                       <h:outputText value="#{pa.numero}" />    
+
+                <p:column headerText="Promocion">
+                    <h:outputText value="#{ar.promocionesId.descripcion}" />    
                 </p:column>
             </p:dataTable>
 

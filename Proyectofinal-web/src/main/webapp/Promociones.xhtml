@@ -10,10 +10,12 @@
     </h:head>
     <h:body>
         <br />
+          
         <h:form>
+              <p:commandButton value="Volver" action="Principal?faces-redirect=true" />
             Administracion de Promociones 
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:panel header="Administracion de Productos">              
+            <p:panel header="Administracion de Promociones">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>id</p:outputLabel>
                     <p:inputText id="tfCodigo"  value="#{promocionesManagedBean.id}" />
