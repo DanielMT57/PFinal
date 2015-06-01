@@ -9,6 +9,7 @@ import com.mycompany.Categoria;
 import com.mycompany.Color;
 import com.mycompany.Marca;
 import com.mycompany.Productos;
+import com.mycompany.Promociones;
 import com.mycompany.sessionbeans.CategoriaEJB;
 import com.mycompany.sessionbeans.ColorEJB;
 import com.mycompany.sessionbeans.MarcaEJB;
@@ -71,46 +72,52 @@ public class ProductoManagedBean implements Serializable {
     }
 
     public void crearProducto() {
-        Productos p = new Productos();
-        //p.setId(id);
-        p.setColorId(colorEJB.buscar(idColor));
-        p.setCategoriaId(categoriaEJB.buscar(idCategoria));
-        p.setMarcaId(marcaEJB.buscar(idMarca));
-        p.setPeso(peso);
-        p.setPrecioCompra(precioCompra);
-        p.setPrecioVenta(precioVenta);
-        p.setDescripcion(descripcion);
 
-        productoEJB.crear(p);
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente el producto  "));
-        System.out.println("ha insertado correctamente");
-        limpiar();
+        try {
+            Productos p = new Productos();
+            //p.setId(id);
+            p.setColorId(colorEJB.buscar(idColor));
+            p.setCategoriaId(categoriaEJB.buscar(idCategoria));
+            p.setMarcaId(marcaEJB.buscar(idMarca));
+            p.setPeso(peso);
+            p.setPrecioCompra(precioCompra);
+            p.setPrecioVenta(precioVenta);
+            p.setDescripcion(descripcion);
+
+            productoEJB.crear(p);
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente el producto  "));
+            System.out.println("ha insertado correctamente");
+            limpiar();
+        } catch (Exception e) {
+            e.getMessage();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "no se ha podido insertar el producto  "));
+
+        }
+
     }
 
     public void buscarProducto() {
-        Productos p=productoEJB.buscar(id);
-        if(p!=null){
-            
-        descripcion=p.getDescripcion();
-        precioCompra=p.getPrecioCompra();
-        precioVenta=p.getPrecioVenta();
-        peso=p.getPeso();
-        idMarca=p.getMarcaId().getId();
-        idCategoria=p.getCategoriaId().getId();
-        idColor=p.getColorId().getId();
-               FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));  
+        Productos p = productoEJB.buscar(id);
+        if (p != null) {
+
+            descripcion = p.getDescripcion();
+            precioCompra = p.getPrecioCompra();
+            precioVenta = p.getPrecioVenta();
+            peso = p.getPeso();
+            idMarca = p.getMarcaId().getId();
+            idCategoria = p.getCategoriaId().getId();
+            idColor = p.getColorId().getId();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
         }
-        else 
-        {
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));  
-        }
-       
+
         System.out.println("ha encontrado  correctamente");
-         //   limpiar ();
+        //   limpiar ();
 
     }
 
-      public void actualizarProducto() {
+    public void actualizarProducto() {
         Productos p = new Productos();
         p.setId(id);
         p.setColorId(colorEJB.buscar(idColor));
@@ -123,31 +130,37 @@ public class ProductoManagedBean implements Serializable {
 
         productoEJB.editar(p);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha actualizado correctamente el producto  "));
-       // System.out.println("ha actualizado correctamente");
+        // System.out.println("ha actualizado correctamente");
         limpiar();
 
     }
-      
-      public void eliminarProducto() {
 
-        Productos p = productoEJB.buscar(id);
+    public void eliminarProducto() {
+        try {
+            Productos p = productoEJB.buscar(id);
 
         productoEJB.eliminar(p);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha eliminado correctamente el Producto "));
-         System.out.println("ha eliminado  correctamente");
+        System.out.println("ha eliminado  correctamente");
         limpiar();
+        } catch (Exception e) {
+            e.getMessage();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "no se ha podido eliminar el producto por que esta asignado a un registro  "));
+
+        }
+        
+
     }
-      
-      
-    
-       private List<Productos> productos;
+
+    private List<Productos> productos;
+     
+       
 
     public List<Productos> getProductos() {
-         productos = productoEJB.listarTodos();
+        productos = productoEJB.listarTodos();
         return productos;
     }
-       
-       
+
 //     
 //      public List<Productos> getproductos() {
 //            productos = productoEJB.listarTodos();
@@ -155,8 +168,6 @@ public class ProductoManagedBean implements Serializable {
 //      
 //          
 //      }
-      
-      
     public int getId() {
         return id;
     }
@@ -241,7 +252,7 @@ public class ProductoManagedBean implements Serializable {
        // throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
 
        // this.setCategorias(null);
-       // this.setColores(null);
+        // this.setColores(null);
         //this.setDescripcion(null);
         this.setId(0);
         this.setPrecioCompra(0);
@@ -250,5 +261,5 @@ public class ProductoManagedBean implements Serializable {
         this.setDescripcion("");
 
     }
-    
+
 }

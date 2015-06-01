@@ -87,7 +87,12 @@ public class PromocionesManagedBean {
 
   
 
-   
+     private List<Promociones> promociones;
+
+    public List<Promociones> getPromociones() {
+         promociones = promocionesEJB.listarTodos();
+        return promociones;
+    }
 
  
 
@@ -115,11 +120,12 @@ public class PromocionesManagedBean {
     
      public void actualizar() {
         Productos p = productosEJB.buscar(productosId);
-         preciofinal = p.getPrecioVenta()*(descuento)/100;
-         setPreciofinal(preciofinal);
+         preciofinal = p.getPrecioVenta()-(p.getPrecioVenta()*descuento/100);
+         
         
          
     }
+     
 
      
      public void crearPromociones(){
@@ -140,11 +146,46 @@ public class PromocionesManagedBean {
      
      }
 
-    private void limpiar() {
-       
+     public void eliminarPromo(){
+      try {
+      Promociones p = promocionesEJB.buscar(id);
+
+        promocionesEJB.eliminar(p);
+        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha eliminado correctamente  "));
+        System.out.println("ha eliminado  correctamente");
+        limpiar();
+        } catch (Exception e) {
+            e.getMessage();
+                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "no se ha podido eliminar el producto por que esta asignado a un registro  "));
+
+        }
         
-        
-        
+     
+     
+     }
+     
+     public void buscarPromociones (){
+     
+       Promociones p = promocionesEJB.buscar(id);
+        if (p != null) {
+             preciofinal=p.getPreciofinal();
+             descuento=p.getDescuento();
+             fechafin=p.getFechafin();
+            descripcion = p.getDescripcion();
+        productosId=p.getProductosId().getId();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
+        }
+
+        System.out.println("ha encontrado  correctamente");
+     
+     }
+  
+     
+    
+    private void limpiar() {    
+                       
         setDescripcion(null);
         setDescuento(0);
         setFechafin(null);

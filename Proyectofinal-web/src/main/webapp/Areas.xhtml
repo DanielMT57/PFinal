@@ -1,0 +1,62 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://java.sun.com/jsf/facelets"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Areas</title>
+    </h:head>
+    <h:body>
+        <br/> 
+        <h:link outcome="Pagina" value="Volver"/>          
+        <h:form>
+            <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
+            <p:panel header="Administracion de Areas de pagina">              
+                <h:panelGrid columns="4" cellpadding="3">
+                    <p:outputLabel>Id</p:outputLabel>
+                    <p:inputText id="tfId" required="true" value="#{paginaBean.idpagina}" />
+               
+                <p:outputLabel>Categoria</p:outputLabel>
+                <p:selectOneMenu value="#{paginaBean.categoriaID}" id="cbxcate" style="width:75%">
+                    <f:selectItems value="#{paginaBean.categorias}" var="cate" itemValue="${cate.id}" itemLabel="${cate.descripcion}" />
+                    </p:selectOneMenu>
+                
+                  <p:outputLabel>Catalogos</p:outputLabel>
+                  <p:selectOneMenu value="#{paginaBean.catalogoID}" id="cbxcata" style="width:75%">
+                      <f:selectItems value="#{paginaBean.catalogos}" var="cata" itemValue="${cata.id}" itemLabel="${cata.id}" />
+                    </p:selectOneMenu>
+                    <p:outputLabel>Numero</p:outputLabel>
+                    <p:inputText id="tfnumero"  value="#{paginaBean.numero}" />
+                 
+                  
+                </h:panelGrid>
+            </p:panel> 
+            <p:row>
+                <p:commandButton value="Insertar" action="#{paginaBean.crearPaginas()}" update="@form"/>
+                <p:commandButton value="Buscar" action="#{paginaBean.buscarPagina()}" update="@form" />
+                <p:commandButton value="Actualizar" action="#{paginaBean.editarPaginas()}" update="@form" />
+                <p:commandButton value="Eliminar" action="#{paginaBean.eliminarPagina()}" update="@form" />
+            </p:row>
+            <p:dataTable  var="pa" value="#{paginaBean.paginas}">
+                <p:column headerText="id">
+                    <h:outputText value="#{pa.id}" />
+                </p:column>
+             
+             
+                <p:column headerText="Categoria">
+                    <h:outputText value="#{pa.categoriaId.descripcion}" />    
+                </p:column>
+                <p:column headerText="Numero catalogo">
+                    <h:outputText value="#{pa.catalogoId.id}" />    
+                </p:column>
+                
+                   <p:column headerText="Numero  Paginas">
+                       <h:outputText value="#{pa.numero}" />    
+                </p:column>
+            </p:dataTable>
+
+        </h:form>   
+    </h:body>
+</html>

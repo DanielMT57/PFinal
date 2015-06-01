@@ -33,10 +33,39 @@
 
                     <p:outputLabel>Precio Final</p:outputLabel>
                     <p:inputText id="tfprecio"  value="#{promocionesManagedBean.preciofinal}" />
-                    
+
                     <p:commandButton value="Insertar" actionListener="#{promocionesManagedBean.crearPromociones()}" ajax="false"/>
+                    <p:commandButton value="buscar" actionListener="#{promocionesManagedBean.buscarPromociones()}" ajax="false"/>
+                    <p:commandButton value="Finalizar Promocion" actionListener="#{promocionesManagedBean.eliminarPromo()}" ajax="false"/>
+
                 </h:panelGrid>  
             </p:panel> 
+
+
+            <p:dataTable  var="pro" value="#{promocionesManagedBean.promociones}">
+                <p:column headerText="id">
+                    <h:outputText value="#{pro.id}" />
+                </p:column>
+                <p:column headerText="Fecha Fin">
+                    <h:outputText value="#{pro.fechafin}">
+                        <f:convertDateTime pattern="dd/MM/yyyy" />
+                    </h:outputText>
+                </p:column>
+
+                <p:column headerText="Productos">
+                    <h:outputText value="#{pro.productosId.descripcion}" />    
+                </p:column>
+                <p:column headerText="Descripcion">
+                    <h:outputText value="#{pro.descripcion}" />    
+                </p:column>
+
+                <p:column headerText="Precio final">
+                    <h:outputText value="#{pro.preciofinal}" />    
+                </p:column>
+                <p:column headerText="Descuento">
+                    <h:outputText value="#{pro.descuento}" />    
+                </p:column>
+            </p:dataTable>
         </h:form>
     </h:body>
 </html>
