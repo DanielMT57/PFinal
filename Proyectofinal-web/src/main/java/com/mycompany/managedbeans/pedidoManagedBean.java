@@ -215,22 +215,21 @@ public class pedidoManagedBean implements Serializable {
 
     public void buscarPedido() {
         Pedidos pe = pedidoEJB.buscar(idPedido);
-        int id=pe.getId();
-        Detallepedido de = detallepedidoEJB.buscar(id);
         if (pe != null) {
-          
+            Detallepedido de = pe.getDetallepedidoCollection().get(0);
+            if (de != null) {
+                idProducto = de.getProductos().getId();
+                cantidad = de.getCantidad();
+                precioUnitario = de.getPreciounitario();
+            }
             descripcion = pe.getDescripcion();
             idAfiliado = pe.getAfiliadosCedula().getCedula();
             idestado = pe.getEstadoId().getId();
-            idProducto = de.getProductos().getId();
-            cantidad = de.getCantidad();
-            precioUnitario = de.getPreciounitario();
 
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
         } else {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
         }
-
         System.out.println("ha encontrado  correctamente");
         //   limpiar ();
 
