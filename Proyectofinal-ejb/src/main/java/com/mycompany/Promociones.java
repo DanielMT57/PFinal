@@ -39,6 +39,7 @@ public class Promociones implements Serializable {
     private int descuento;
     @Column(name = "preciofinal")
     private int preciofinal;
+    private int cantidad;
     @ManyToOne
     @JoinColumn(name = "productos_id", referencedColumnName = "id")
 	private Productos productosId;
@@ -110,6 +111,15 @@ public class Promociones implements Serializable {
     public void setDescuento(int descuento) {
         this.descuento = descuento;
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
     
     
 }

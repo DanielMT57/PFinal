@@ -14,6 +14,7 @@ import com.mycompany.sessionbeans.ProductoEJB;
 import com.mycompany.sessionbeans.PromocionesEJB;
 import com.mycompany.Productos;
 import com.mycompany.Promociones;
+import java.io.Serializable;
 import java.util.List;
 import javax.ejb.EJB;
 import javax.faces.application.FacesMessage;
@@ -26,7 +27,7 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @Named(value = "promocionesManagedBean")
 @ViewScoped
-public class PromocionesManagedBean {
+public class PromocionesManagedBean implements Serializable{
 
     /**
      * Creates a new instance of PromocionesManagedBean
@@ -38,6 +39,7 @@ public class PromocionesManagedBean {
     private Date fechafin;
     private int descuento;
     private double preciofinal;
+    private int cantidad;
 
     @EJB
     private ProductoEJB productosEJB;
@@ -120,10 +122,7 @@ public class PromocionesManagedBean {
     
      public void actualizar() {
         Productos p = productosEJB.buscar(productosId);
-         preciofinal = p.getPrecioVenta()-(p.getPrecioVenta()*descuento/100);
-         
-        
-         
+        preciofinal = p.getPrecioVenta();
     }
      
 
@@ -133,7 +132,12 @@ public class PromocionesManagedBean {
      pe.setId(id);
      pe.setDescripcion(descripcion);
      pe.setFechafin(fechafin);
-     pe.setPreciofinal(productosId);
+     pe.setCantidad(cantidad);
+     int precioTotal= (int) (preciofinal*cantidad);
+     precioTotal= precioTotal - (precioTotal*descuento/100);
+         System.out.println(descuento);
+         System.out.println(precioTotal);
+     pe.setPreciofinal(precioTotal);
      pe.setProductosId(productosEJB.buscar(productosId));
      pe.setDescuento(descuento);
      promocionesEJB.crear(pe);
@@ -172,6 +176,7 @@ public class PromocionesManagedBean {
              descuento=p.getDescuento();
              fechafin=p.getFechafin();
             descripcion = p.getDescripcion();
+            cantidad=p.getCantidad();
         productosId=p.getProductosId().getId();
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha encontrado correctamente "));
         } else {
@@ -181,8 +186,6 @@ public class PromocionesManagedBean {
         System.out.println("ha encontrado  correctamente");
      
      }
-  
-     
     
     private void limpiar() {    
                        
@@ -193,4 +196,13 @@ public class PromocionesManagedBean {
         setId(0);
         
     }
+
+    public int getCantidad() {
+        return cantidad;
+    }
+
+    public void setCantidad(int cantidad) {
+        this.cantidad = cantidad;
+    }
+    
 }

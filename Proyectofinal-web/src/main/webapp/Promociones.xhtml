@@ -11,22 +11,23 @@
     <h:body>
         <br />
           
-        <h:form>
+        <h:form id="formu">
               <p:commandButton value="Volver" action="Principal?faces-redirect=true" />
             Administracion de Promociones 
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
-            <p:panel header="Administracion de Promociones">              
+            <p:panel header="Administracion de Promociones" id="panelP">              
                 <h:panelGrid columns="4" cellpadding="3">
                     <p:outputLabel>id</p:outputLabel>
                     <p:inputText id="tfCodigo"  value="#{promocionesManagedBean.id}" />
                     <p:outputLabel>productos</p:outputLabel>
                     <p:selectOneMenu value="#{promocionesManagedBean.productosId}" id="cbxproductos" style="width:75%">
                         <f:selectItems value="#{promocionesManagedBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
-                        <p:ajax update="@form" listener="#{promocionesManagedBean.actualizar()}"/>
+                        <p:ajax update=":formu:panelP" listener="#{promocionesManagedBean.actualizar()}"/>
                     </p:selectOneMenu>  
                     <p:outputLabel>descripcion</p:outputLabel>
                     <p:inputText id="tfdescripcion"  value="#{promocionesManagedBean.descripcion}" />
-
+                    <p:outputLabel>cantidad</p:outputLabel>
+                    <p:inputText id="tfCantidad"  value="#{promocionesManagedBean.cantidad}" />
                     <p:outputLabel for="mask2" value="Fecha Fin:" />
                     <p:calendar id="mask2" value="#{promocionesManagedBean.fechafin}" pattern="dd-MM-yyyy"  />
 
@@ -60,7 +61,9 @@
                 <p:column headerText="Descripcion">
                     <h:outputText value="#{pro.descripcion}" />    
                 </p:column>
-
+                <p:column headerText="Cantidad">
+                    <h:outputText value="#{pro.cantidad}" />    
+                </p:column>
                 <p:column headerText="Precio final">
                     <h:outputText value="#{pro.preciofinal}" />    
                 </p:column>
