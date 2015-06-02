@@ -152,6 +152,9 @@ public class AreasBean implements Serializable {
 
     }
 
+    public void actualizarPromociones(){
+        promociones=productosEJB.buscar(productosId).getPromocionesProductos();
+    }
     public void buscarArea() {
 
         Areaspagina a = areaspaginaEJB.buscar(id);

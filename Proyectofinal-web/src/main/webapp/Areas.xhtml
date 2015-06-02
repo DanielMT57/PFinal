@@ -28,6 +28,7 @@
                     <p:outputLabel>Productos</p:outputLabel>
                     <p:selectOneMenu value="#{areasBean.productosId}" id="cbxpro" >
                         <f:selectItems value="#{areasBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
+                        <p:ajax update="@form" listener="#{areasBean.actualizarPromociones()}" />
                     </p:selectOneMenu>
 
                     <p:outputLabel>Promociones</p:outputLabel>
