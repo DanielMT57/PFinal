@@ -38,16 +38,19 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class pedidoManagedBean implements Serializable {
 
+    /**
+     * Atributos de la vista de pedidos
+     */
     private int idPedido;
     private int idPedidoList;
     private int idAfiliado;
     private int idestado;
-    private List<Afiliados> afiliados;
-    private List<Estado> estados;
+    private List<Afiliados> afiliados; // declaro una nueva de afiliados
+    private List<Estado> estados; // declaro una nueva de estados
     private Date fecha;
     private String descripcion;
-    private List<Detallepedido> detalles;
-    private List<Pedidos> pedidos;
+    private List<Detallepedido> detalles; // declaro una nueva de detalles
+    private List<Pedidos> pedidos; // declaro una nueva de afiliados de pedidos
 
     private int ide;
     ////
@@ -57,20 +60,21 @@ public class pedidoManagedBean implements Serializable {
     private List<Productos> productos;
 
     @EJB
-    private ProductoEJB productoEJB;
+    private ProductoEJB productoEJB; //Instancio un objeto de productoEJB
 
     @EJB
-    private AfiliadoEJB afiliadosEJB;
+    private AfiliadoEJB afiliadosEJB; //Instancio un objeto de afiliadosEJB
 
     @EJB
-    private estadoEJB estadoEJB;
+    private estadoEJB estadoEJB; //Instancio un objeto de estadoEJB
 
     @EJB
-    private PedidoEJB pedidoEJB;
+    private PedidoEJB pedidoEJB; //Instancio un objeto de pedidoEJB
 
     @EJB
-    private detallePedidoEJB detallepedidoEJB;
+    private detallePedidoEJB detallepedidoEJB; //Instancio un objeto de detallepedidoEJB
 
+    //Getters y setters de los atributos
     public int getIde() {
         return ide;
     }
@@ -137,10 +141,10 @@ public class pedidoManagedBean implements Serializable {
 
     @PostConstruct
     public void postConstruct() {
-        afiliados = afiliadosEJB.listarTodos();
-        estados = estadoEJB.listarTodos();
-        productos = productoEJB.listarTodos();
-        pedidos = pedidoEJB.listarPedidos();
+        afiliados = afiliadosEJB.listarTodos();   // carga el combo de afiliados
+        estados = estadoEJB.listarTodos(); // carga el combo de estados
+        productos = productoEJB.listarTodos(); // carga el combo de productos
+        pedidos = pedidoEJB.listarPedidos(); // carga el combo de pedidos
     }
 
     public int getIdProducto() {
@@ -180,23 +184,40 @@ public class pedidoManagedBean implements Serializable {
         return pedidos;
     }
 
+    /**
+     * Metodo que carga los detalles pedidos a la vista, persistidos en la base
+     * de datos
+     *
+     * @return detalles
+     */
     public List<Detallepedido> getDetalles() {
-        detalles=detallepedidoEJB.listarTodos();
+        detalles = detallepedidoEJB.listarTodos();
         return detalles;
     }
 
+    /**
+     * Metodo que carga el precioventa
+     */
     public void cargar() {
         Productos p = productoEJB.buscar(idProducto);
         double precio = p.getPrecioVenta();
         this.setPrecioUnitario(precio);
     }
 
+    /**
+     * Metodo que carga el precio unitario de un producto
+     */
     public void actualizar() {
         Productos p = productoEJB.buscar(idProducto);
         precioUnitario = p.getPrecioVenta();
     }
 
+    /**
+     * Metodo que se encarga de crear los pedidos seteando los valores con
+     * sincronizado y en inicio cuando ya haya sincronizado cambia el estado
+     */
     public void crearPedidos() {
+
         Pedidos pe = new Pedidos();
         pe.setId(idPedido);
         pe.setAfiliadosCedula(afiliadosEJB.buscar(idAfiliado));
@@ -205,17 +226,21 @@ public class pedidoManagedBean implements Serializable {
         pe.setSincronizado('0');
         pe.setDescripcion("Inicio");
         pedidoEJB.crear(pe);
-       pedidos = pedidoEJB.listarPedidos();
+        pedidos = pedidoEJB.listarPedidos();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente  "));
         System.out.println("ha insertado correctamente");
         limpiar();
 
     }
 
+    /**
+     * Metodo que se encarga de crear los detalles de los pedidos Teniendo en
+     * cuenta que un pedido puede tener muchos detalles
+     */
     public void crearDetallePedido() {
         try {
             Detallepedido de = new Detallepedido();
-            // de.setDetallepedidoPK(idPedido, idProducto);
+            //Buscar el id de los pedidos y los persiste
             de.setPedidos(pedidoEJB.buscar(idPedidoList));
             de.setProductos(productoEJB.buscar(idProducto));
             de.setCantidad(cantidad);
@@ -226,7 +251,7 @@ public class pedidoManagedBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente  "));
         } catch (Exception e) {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "No se pudo insertar "));
-
+            // en caso de ocurrir un error envia un mensaje
             e.getMessage();
         }
 
@@ -267,6 +292,10 @@ public class pedidoManagedBean implements Serializable {
 //        detallepedidoEJB.editar(de);
     }
 
+    /**
+     * Metodo que actualiza un pedido con sus nuevos valores envia un mensaje
+     * cuando la transaccion sea exitosa
+     */
     public void actualizarPedido() {
         Pedidos pe = pedidoEJB.buscar(idPedido);
         pe.setAfiliadosCedula(afiliadosEJB.buscar(idAfiliado));
@@ -279,6 +308,10 @@ public class pedidoManagedBean implements Serializable {
         limpiar();
     }
 
+    /**
+     * Metodo que limpia los campos cuando se hatan realizado transacciones
+     * exitosas
+     */
     public void limpiar() {
         this.setIdPedido(0);
         this.setCantidad(0);

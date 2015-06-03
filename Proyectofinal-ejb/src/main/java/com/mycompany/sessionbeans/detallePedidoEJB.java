@@ -18,6 +18,7 @@ import com.mycompany.Detallepedido;
 @LocalBean
 @Stateless
 public class detallePedidoEJB extends EJBGenerico<Detallepedido>{
+     // estos ejbs Heredan de un ejb generico
     
     
     

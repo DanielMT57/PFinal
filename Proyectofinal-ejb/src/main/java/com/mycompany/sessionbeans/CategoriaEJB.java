@@ -14,8 +14,9 @@ package com.mycompany.sessionbeans;
 import com.mycompany.Categoria;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
+
 @LocalBean
 @Stateless
-public class CategoriaEJB extends EJBGenerico<Categoria>{
-    
+public class CategoriaEJB extends EJBGenerico<Categoria> {
+      // estos ejbs Heredan de un ejb generico
 }

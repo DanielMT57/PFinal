@@ -23,7 +23,7 @@ import javax.persistence.Query;
 
 /**
  * REST Web Service
- *
+ * Servicio web que carga la lista de pedidos
  * @author MAO
  */
 @Path("servicio")
@@ -45,7 +45,7 @@ public class ServicioPedidoResource {
     /**
      * Retrieves representation of an instance of
      * com.mycompany.managedbeans.ServicioPedidoResource
-     *
+     *   carga la lista de pedidos en format json
      * @return an instance of java.lang.String
      */
     @GET

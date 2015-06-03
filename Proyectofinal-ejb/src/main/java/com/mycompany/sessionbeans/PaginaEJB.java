@@ -16,5 +16,5 @@ import javax.ejb.Stateless;
 @LocalBean
 @Stateless
 public class PaginaEJB extends EJBGenerico<Paginas> {
-
+ // estos ejbs Heredan de un ejb generico
 }

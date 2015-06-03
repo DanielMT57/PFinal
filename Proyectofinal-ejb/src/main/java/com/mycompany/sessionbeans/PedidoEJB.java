@@ -25,7 +25,7 @@ import javax.ws.rs.Produces;
 //@WebService(portName="PedidoWSPort", serviceName="PedidoWSService", targetNamespace="http://localhost:8082/PedidoWSPort/PedidoWSService")
 // @Produces("application/json")
 public class PedidoEJB extends EJBGenerico<Pedidos>{
-
+  // estos ejbs Heredan de un ejb generico
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method"
 //

@@ -9,7 +9,6 @@ import com.mycompany.Ciudades;
 import com.mycompany.Nivel;
 import com.mycompany.Personas;
 import com.mycompany.Afiliados;
-import com.mycompany.Productos;
 
 import com.mycompany.sessionbeans.CiudadesEJB;
 import com.mycompany.sessionbeans.NivelesEJB;
@@ -37,6 +36,10 @@ import javax.faces.view.ViewScoped;
 
 public class PersonaManagedBean implements Serializable {
 
+    /**
+     * Atributos a los que hara referencia la vista de pedidos
+     *
+     */
     private int cedula;
     private int idCiudades;
     private long telefono;
@@ -47,17 +50,17 @@ public class PersonaManagedBean implements Serializable {
     private List<Ciudades> ciudades;
 
     @EJB
-    private PersonasEJB personasEJB;
+    private PersonasEJB personasEJB; // instancio un objeto de personaejb
     @EJB
-    private CiudadesEJB ciudadesEJB;
+    private CiudadesEJB ciudadesEJB;  // instancio un objeto de ciudadesejb
 
     @EJB
-    private NivelesEJB nivelesEJB;
+    private NivelesEJB nivelesEJB; // instancio un objeto dniveles
 
     @EJB
-    private AfiliadoEJB afiliadosEJB;
+    private AfiliadoEJB afiliadosEJB; // instancio un objeto de afiliados
 
-    private List<Nivel> niveles;
+    private List<Nivel> niveles; // declaro una lista de niveles
     private Date fechaAfiliacion;
 
     private int idNiveles;
@@ -173,9 +176,14 @@ public class PersonaManagedBean implements Serializable {
         this.idNiveles = idNiveles;
     }
 
+    /**
+     * Metodo que se encarga de crear personas encierro en en bloque try catch
+     * en caso de no poder insertar lanzar el mensaje que no s epudo insertar
+     *
+     */
     public void crearPersonas() {
         try {
-            Personas pe = new Personas();
+            Personas pe = new Personas(); // creo una persona
             pe.setCedula(cedula);
             pe.setTelefono(telefono);
             pe.setNombre(nombre);
@@ -183,13 +191,8 @@ public class PersonaManagedBean implements Serializable {
             pe.setDireccion(direccion);
             pe.setEmail(email);
             pe.setCiudadesId(ciudadesEJB.buscar(idCiudades));
-//        personasEJB.crear(pe);
-
-            
-            //pe=personasEJB.buscar(pe.getCedula());
+            // creo un afiliado con sus contrcutor y le envio los valores
             Afiliados af = new Afiliados(fechaAfiliacion, '0', nivelesEJB.buscar(idNiveles), cedula, telefono, nombre, apellido, direccion, ciudadesEJB.buscar(idCiudades), email);
-//        af.setCedula(pe.getCedula());
-//        af.setNivel();
 
             afiliadosEJB.crear(af);
 
@@ -204,6 +207,10 @@ public class PersonaManagedBean implements Serializable {
 
     }
 
+    /**
+     * Metodo que se encarga de buscar una persona, en caso de que la busqueda
+     * sea null envia un mensaje indicando de que nose encontro nada
+     */
     public void buscarPersona() {
         Personas p = personasEJB.buscar(cedula);
         Afiliados af = afiliadosEJB.buscar(cedula);
@@ -228,34 +235,53 @@ public class PersonaManagedBean implements Serializable {
 
     }
 
+    /**
+     * Metodo que se encarga de actualizar una persona con sus nuevos valores
+     */
     public void actualizarPersona() {
-        Afiliados a = afiliadosEJB.buscar(cedula);
-        a.setCedula(cedula);
-        a.setCiudadesId(ciudadesEJB.buscar(idCiudades));
-        a.setNombre(nombre);
-        a.setApellidos(apellido);
-        a.setDireccion(direccion);
-        a.setEmail(email);
-        a.setTelefono(telefono);
-        idNiveles = a.getNivel().getId();
-        fechaAfiliacion = a.getFechaafiliacion();
-        a.setNivel(nivelesEJB.buscar(idNiveles));
-        a.setFechaafiliacion(fechaAfiliacion);
-        afiliadosEJB.editar(a);
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha actualizado correctamente  "));
-        // System.out.println("ha actualizado correctamente");
-        limpiar();
+        try {
+            Afiliados a = afiliadosEJB.buscar(cedula);
+            a.setCedula(cedula);
+            a.setCiudadesId(ciudadesEJB.buscar(idCiudades));
+            a.setNombre(nombre);
+            a.setApellidos(apellido);
+            a.setDireccion(direccion);
+            a.setEmail(email);
+            a.setTelefono(telefono);
+            idNiveles = a.getNivel().getId();
+            fechaAfiliacion = a.getFechaafiliacion();
+            a.setNivel(nivelesEJB.buscar(idNiveles));
+            a.setFechaafiliacion(fechaAfiliacion);
+            afiliadosEJB.editar(a);
+            // envio un mensaje si la actualizacion fue exitosa
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha actualizado correctamente  "));
+            System.out.println("ha actualizado correctamente");
+            limpiar();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "error al editar  "));
+            // en caso de fallar enviar mensaje de error
+            e.getMessage();
+        }
 
     }
 
-    private List<Personas> personas;
+    private List<Personas> personas; // nueva lista de personas
 
+    /**
+     * Metodo que se encarga de listar las personas persistidas en la base de
+     * datos
+     *
+     * @return personas lista
+     */
     public List<Personas> getPersonas() {
         personas = personasEJB.listarTodos();
         return personas;
     }
 
+    /**
+     * Metodo que limpia los campos
+     */
     private void limpiar() {
 
         this.setCedula(0);

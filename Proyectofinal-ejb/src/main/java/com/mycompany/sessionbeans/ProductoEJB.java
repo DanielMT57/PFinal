@@ -18,5 +18,5 @@ import javax.ejb.Stateless;
 public class ProductoEJB extends EJBGenerico<Productos>{
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
-    
+     // estos ejbs Heredan de un ejb generico
 }

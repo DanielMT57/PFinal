@@ -18,5 +18,5 @@ import javax.ejb.Stateless;
 @LocalBean
 @Stateless
 public class DespachoEJB extends EJBGenerico<Despachos>{
-    
+     // estos ejbs Heredan de un ejb generico
 }

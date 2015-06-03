@@ -16,7 +16,7 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class AreasPaginaEJB extends EJBGenerico<Areaspagina> {
-
+  // estos ejbs Heredan de un ejb generico
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }

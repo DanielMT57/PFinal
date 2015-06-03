@@ -17,7 +17,7 @@ import javax.ejb.Stateless;
 @Stateless
 @LocalBean
 public class CatalogoEJB extends EJBGenerico<Catalogo>{
-
+  // estos ejbs Heredan de un ejb generico
     // Add business logic below. (Right-click in editor and choose
     // "Insert Code > Add Business Method")
 }
