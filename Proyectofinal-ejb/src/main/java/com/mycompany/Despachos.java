@@ -25,10 +25,9 @@ import javax.persistence.PrimaryKeyJoinColumn;
  */
 @Entity
 @Table(name = "Despachos")
-@PrimaryKeyJoinColumn(name = "Id", referencedColumnName = "Id")
+//@PrimaryKeyJoinColumn(name = "Id", referencedColumnName = "Id")
 
-//@PrimaryKeyJoinColumn(name = "pedidos_id", referencedColumnName = "Id")
-public class Despachos extends Pedidos implements Serializable  {
+public class Despachos implements Serializable  {
     
     @Id
     @Column(name = "Pedidos_id")
