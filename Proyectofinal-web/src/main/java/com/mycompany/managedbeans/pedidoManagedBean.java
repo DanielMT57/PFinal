@@ -140,7 +140,7 @@ public class pedidoManagedBean implements Serializable {
         afiliados = afiliadosEJB.listarTodos();
         estados = estadoEJB.listarTodos();
         productos = productoEJB.listarTodos();
-        pedidos= pedidoEJB.listarPedidos();
+        pedidos = pedidoEJB.listarPedidos();
     }
 
     public int getIdProducto() {
@@ -181,6 +181,7 @@ public class pedidoManagedBean implements Serializable {
     }
 
     public List<Detallepedido> getDetalles() {
+        detalles=detallepedidoEJB.listarTodos();
         return detalles;
     }
 
@@ -204,22 +205,31 @@ public class pedidoManagedBean implements Serializable {
         pe.setSincronizado('0');
         pe.setDescripcion("Inicio");
         pedidoEJB.crear(pe);
-        pedidos=pedidoEJB.listarPedidos();
+       pedidos = pedidoEJB.listarPedidos();
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente  "));
         System.out.println("ha insertado correctamente");
         limpiar();
-        
+
     }
 
     public void crearDetallePedido() {
-        Detallepedido de = new Detallepedido();
-        // de.setDetallepedidoPK(idPedido, idProducto);
-        de.setPedidos(pedidoEJB.buscar(idPedidoList));
-        de.setProductos(productoEJB.buscar(idProducto));
-        de.setCantidad(cantidad);
-        de.setPreciounitario(precioUnitario);
-        de.setSincronizado('0');
-        detallepedidoEJB.crear(de);
+        try {
+            Detallepedido de = new Detallepedido();
+            // de.setDetallepedidoPK(idPedido, idProducto);
+            de.setPedidos(pedidoEJB.buscar(idPedidoList));
+            de.setProductos(productoEJB.buscar(idProducto));
+            de.setCantidad(cantidad);
+            de.setPreciounitario(precioUnitario);
+            de.setSincronizado('0');
+            detallepedidoEJB.crear(de);
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente  "));
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "No se pudo insertar "));
+
+            e.getMessage();
+        }
+
     }
 
     public void buscarDetallePedido() {
@@ -284,7 +294,5 @@ public class pedidoManagedBean implements Serializable {
     public void setIdPedidoList(int idPedidoList) {
         this.idPedidoList = idPedidoList;
     }
-    
-    
 
 }

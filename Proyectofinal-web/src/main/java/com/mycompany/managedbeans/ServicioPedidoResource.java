@@ -32,7 +32,7 @@ public class ServicioPedidoResource {
 
     @EJB
     PedidoEJB pe;
-    
+
     @Context
     private UriInfo context;
 
@@ -43,15 +43,17 @@ public class ServicioPedidoResource {
     }
 
     /**
-     * Retrieves representation of an instance of com.mycompany.managedbeans.ServicioPedidoResource
+     * Retrieves representation of an instance of
+     * com.mycompany.managedbeans.ServicioPedidoResource
+     *
      * @return an instance of java.lang.String
      */
     @GET
-   @Produces("application/json")
+    @Produces("application/json")
     public List<Pedidos> listarPedidos(){
-       
+
        return pe.listarPedidos();
-       
+
     }
 
     /**

@@ -174,27 +174,33 @@ public class PersonaManagedBean implements Serializable {
     }
 
     public void crearPersonas() {
-
-        Personas pe = new Personas();
-        pe.setCedula(cedula);
-        pe.setTelefono(telefono);
-        pe.setNombre(nombre);
-        pe.setApellidos(apellido);
-        pe.setDireccion(direccion);
-        pe.setEmail(email);
-        pe.setCiudadesId(ciudadesEJB.buscar(idCiudades));
+        try {
+            Personas pe = new Personas();
+            pe.setCedula(cedula);
+            pe.setTelefono(telefono);
+            pe.setNombre(nombre);
+            pe.setApellidos(apellido);
+            pe.setDireccion(direccion);
+            pe.setEmail(email);
+            pe.setCiudadesId(ciudadesEJB.buscar(idCiudades));
 //        personasEJB.crear(pe);
 
-        //pe=personasEJB.buscar(pe.getCedula());
-        Afiliados af = new Afiliados(fechaAfiliacion, '0', nivelesEJB.buscar(idNiveles), cedula, telefono, nombre, apellido, direccion, ciudadesEJB.buscar(idCiudades), email);
+            
+            //pe=personasEJB.buscar(pe.getCedula());
+            Afiliados af = new Afiliados(fechaAfiliacion, '0', nivelesEJB.buscar(idNiveles), cedula, telefono, nombre, apellido, direccion, ciudadesEJB.buscar(idCiudades), email);
 //        af.setCedula(pe.getCedula());
 //        af.setNivel();
 
-        afiliadosEJB.crear(af);
+            afiliadosEJB.crear(af);
 
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente "));
-        System.out.println("ha insertado correctamente");
-        limpiar();
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente "));
+            System.out.println("ha insertado correctamente");
+            limpiar();
+        } catch (Exception e) {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_WARN, "Informacion", " ERROR---- "));
+
+            e.getMessage();
+        }
 
     }
 
@@ -223,7 +229,7 @@ public class PersonaManagedBean implements Serializable {
     }
 
     public void actualizarPersona() {
-        Afiliados a= afiliadosEJB.buscar(cedula);
+        Afiliados a = afiliadosEJB.buscar(cedula);
         a.setCedula(cedula);
         a.setCiudadesId(ciudadesEJB.buscar(idCiudades));
         a.setNombre(nombre);
@@ -242,15 +248,13 @@ public class PersonaManagedBean implements Serializable {
         limpiar();
 
     }
-    
-     private List<Personas> personas;
+
+    private List<Personas> personas;
 
     public List<Personas> getPersonas() {
-       personas= personasEJB.listarTodos();
+        personas = personasEJB.listarTodos();
         return personas;
     }
-     
-     
 
     private void limpiar() {
 
