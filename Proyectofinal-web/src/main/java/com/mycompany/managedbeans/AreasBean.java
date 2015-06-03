@@ -41,6 +41,10 @@ public class AreasBean implements Serializable {
      */
 //    public AreasBean() {
 //    }
+    
+    /**
+     * Atributos de la pagina que controla la vista de areas pagina
+     */
     private int id;
     private int paginasId;
     private int productosId;
@@ -66,7 +70,7 @@ public class AreasBean implements Serializable {
         paginas = paginaEJB.listarTodos();
 
     }
-
+       // getters y getters de estos atributos
     public int getId() {
         return id;
     }
@@ -129,7 +133,12 @@ public class AreasBean implements Serializable {
         areas = areaspaginaEJB.listarTodos();
         return areas;
     }
-
+/**
+ * Metodo que crea las areas de las paginas
+ * en el try inserta la pagina y envia mensaje
+ * en caso de no insertar entra el catch y manda el mensaje que no se pudo insertar
+ * 
+ */
     public void crearAreas() {
 
         try {
@@ -155,6 +164,9 @@ public class AreasBean implements Serializable {
     public void actualizarPromociones(){
         promociones=productosEJB.buscar(productosId).getPromocionesProductos();
     }
+    /**
+     * Metodo que busca el area, por id
+     */
     public void buscarArea() {
 
         Areaspagina a = areaspaginaEJB.buscar(id);
@@ -172,7 +184,9 @@ public class AreasBean implements Serializable {
         //   limpiar ();
 
     }
-
+/**
+ * Metodo que edita las areas de pagina
+ */
     public void editarAreas() {
 
         try {
@@ -182,7 +196,7 @@ public class AreasBean implements Serializable {
             a.setPaginasId(paginaEJB.buscar(paginasId));
             a.setProductosId(productosEJB.buscar(productosId));
             a.setPromocionesId(promocionesEJB.buscar(promocionesId));
-
+            //persiste  la entidad en la base de datos
             areaspaginaEJB.editar(a);
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha  editado correctamente  "));
             System.out.println("ha editado correctamente");
@@ -195,7 +209,9 @@ public class AreasBean implements Serializable {
 
     }
     
-    
+    /**
+     * Metodo que elimina las areas
+     */
     public void eliminarArea() {
         try {
             Areaspagina a = areaspaginaEJB.buscar(id);
@@ -211,7 +227,9 @@ public class AreasBean implements Serializable {
         }
 
     }
-
+/**
+ * Metodo que setea los valores
+ */
     private void limpiar() {
         setId(0);
     }

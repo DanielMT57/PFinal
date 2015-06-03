@@ -26,7 +26,9 @@ import javax.faces.view.ViewScoped;
 @Named(value = "afiliadoBean")
 @ViewScoped
 public class AfiliadoManagedBean implements Serializable{
-    
+    /**
+     * Atributos que hacen referencia en la vista de afiliados
+     */
     private int cedula;
     private int idNiveles;
     private int idAfiliados;
@@ -34,7 +36,9 @@ public class AfiliadoManagedBean implements Serializable{
     
     private List<Nivel> niveles;
     private List<Afiliados> afiliados;
-    
+    /**
+     * Instancio los ejbs necesarios para realizar las transacciones
+     */
     @EJB
     private AfiliadoEJB afiliadosEJB;
     @EJB
@@ -109,7 +113,10 @@ public class AfiliadoManagedBean implements Serializable{
      */
 //    public AfiliadoManagedBean() {        
 //    }
-    
+
+    /**
+     * Post construct de la pagina afliados que va a cargar los niveles
+     */
       @PostConstruct
     public void postConstruct() {
         niveles = nivelesEJB.listarTodos();

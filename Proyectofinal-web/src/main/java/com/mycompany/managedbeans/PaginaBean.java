@@ -8,9 +8,9 @@ package com.mycompany.managedbeans;
 import com.mycompany.Categoria;
 import com.mycompany.Catalogo;
 import javax.inject.Named;
-import javax.enterprise.context.Dependent;
+
 import com.mycompany.Paginas;
-import com.mycompany.Productos;
+
 import com.mycompany.sessionbeans.PaginaEJB;
 import com.mycompany.sessionbeans.CategoriaEJB;
 import com.mycompany.sessionbeans.CatalogoEJB;
@@ -33,28 +33,31 @@ import javax.faces.view.ViewScoped;
 @ViewScoped
 public class PaginaBean implements Serializable {
 
+    /**
+     * Atributos a capturar en la vista de paginas
+     */
     private int idpagina;
     private int categoriaID;
     private int catalogoID;
     private BigInteger numero;
 
-    private List<Categoria> categorias;
-    private List<Catalogo> catalogos;
+    private List<Categoria> categorias; // listado de categorias
+    private List<Catalogo> catalogos; //listado de catalogos
 
-    private List<Paginas> paginas;
-
-    @EJB
-    private CategoriaEJB categoriaEJB;
+    private List<Paginas> paginas; // listado de paginas
 
     @EJB
-    private CatalogoEJB catalogoEJB;
+    private CategoriaEJB categoriaEJB; // instancio un ejb de categoria
 
     @EJB
-    private PaginaEJB paginaEJB;
+    private CatalogoEJB catalogoEJB; // instancio un ejb de catalogos
+
+    @EJB
+    private PaginaEJB paginaEJB; // instancio un ejb de paginas
 
     @PostConstruct
     public void postConstruct() {
-
+        // listado de categorias y catalogos que  quiero que se cargen
         categorias = categoriaEJB.listarTodos();
         catalogos = catalogoEJB.listarTodos();
     }
@@ -112,11 +115,16 @@ public class PaginaBean implements Serializable {
         return paginas;
     }
 
+    /**
+     * Metodo qeu se encarga de crear las paginas entra al try en caso de no ser
+     * exitosa la transaccion entra al catch enviando un mensaje que no se pudo
+     * crear
+     */
     public void crearPaginas() {
 
         try {
             Paginas p = new Paginas();
-            //p.setId(id);
+
             p.setId(idpagina);
             p.setCategoriaId(categoriaEJB.buscar(categoriaID));
             p.setCatalogoId(catalogoEJB.buscar(catalogoID));
@@ -134,6 +142,11 @@ public class PaginaBean implements Serializable {
 
     }
 
+    /**
+     * Metodo que se encarga de editar las paginas entra al try en caso de no
+     * ser exitosa la transaccion entra al catch enviando un mensaje que no se
+     * pudo editar
+     */
     public void editarPaginas() {
 
         try {
@@ -156,11 +169,19 @@ public class PaginaBean implements Serializable {
 
     }
 
+    /**
+     * metodo que se encarga de limpiar los campos cuando se haya realizado una
+     * transaccion
+     */
     private void limpiar() {
         setIdpagina(0);
         setNumero(BigInteger.ZERO);
     }
 
+    /**
+     * Metodo que busca la pagina por su id en caso de que no sea null la
+     * busqueda, carge los valores encontrados
+     */
     public void buscarPagina() {
         Paginas p = paginaEJB.buscar(idpagina);
         if (p != null) {
@@ -178,6 +199,10 @@ public class PaginaBean implements Serializable {
 
     }
 
+    /**
+     * Metodo que elimina la pagina en caso de que no se pueda eliminar envio
+     * mensaje
+     */
     public void eliminarPagina() {
         try {
             Paginas p = paginaEJB.buscar(idpagina);

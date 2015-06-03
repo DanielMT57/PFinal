@@ -32,15 +32,16 @@ public class DespachoBean implements Serializable {
     private List<Despachos> despachos;
 
     @EJB
-    private DespachoEJB despachoEJB;
+    private DespachoEJB despachoEJB; //instancio un ejb de despacho
 
     @PostConstruct
     public void postConstruct() {
-       
-        despachos=despachoEJB.listarTodos();
+
+        despachos = despachoEJB.listarTodos(); // cargo los despachos
     }
+
     public List<Despachos> getDespachos() {
-        despachos = despachoEJB.listarTodos();
+        despachos = despachoEJB.listarTodos(); // cargo la lista de despachos
         return despachos;
     }
 

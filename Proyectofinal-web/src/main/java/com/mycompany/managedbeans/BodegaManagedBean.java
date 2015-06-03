@@ -26,25 +26,29 @@ import javax.faces.context.FacesContext;
 @ManagedBean
 @Named(value = "bodegaBean")
 @ViewScoped
-public class BodegaManagedBean implements Serializable{
+public class BodegaManagedBean implements Serializable {
 
+    /**
+     * Atributos de la vista de bodega
+     */
     private int id;
     private int idCiudades;
     private String direccion;
     private List<Ciudades> ciudades;
     @EJB
-    private CiudadesEJB ciudadesEJB;
-    
-      @EJB
-    private BodegasEJB bodegaEJB;
+    private CiudadesEJB ciudadesEJB; // ejb de ciudades
+
+    @EJB
+    private BodegasEJB bodegaEJB; // ejb de bodega
+
     /**
      * Creates a new instance of BodegaManagedBean
      */
     
     @PostConstruct
     public void postConstruct() {
-     ciudades = ciudadesEJB.listarTodos();
-    }       
+        ciudades = ciudadesEJB.listarTodos();
+    }
 
 //    public BodegaManagedBean() {
 //    ciudades = ciudadesEJB.listarTodos();
@@ -88,14 +92,17 @@ public class BodegaManagedBean implements Serializable{
 
     public void setCiudadesEJB(CiudadesEJB ciudadesEJB) {
         this.ciudadesEJB = ciudadesEJB;
-    }  
-    
-     public void crearBodega() {
+    }
+
+    /**
+     * Metodo que crea una bodega
+     */
+    public void crearBodega() {
         Bodegas bo = new Bodegas();
         bo.setId(id);
         bo.setCiudadesId(ciudadesEJB.buscar(idCiudades));
         bo.setDireccion(direccion);
-
+        // crea la bodega exitosamente y manda el mensaje
         bodegaEJB.crear(bo);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente la bodega "));
         System.out.println("ha insertado correctamente");
@@ -103,6 +110,9 @@ public class BodegaManagedBean implements Serializable{
 
     }
 
+    /**
+     * Metodo que busca una bodega por su id
+     */
     public void buscarBodega() {
         Bodegas bo = bodegaEJB.buscar(id);
         if (bo != null) {
@@ -115,15 +125,16 @@ public class BodegaManagedBean implements Serializable{
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
         }
 
-     //   System.out.println("ha encontrado  correctamente");
+        //   System.out.println("ha encontrado  correctamente");
         //   limpiar ();
-
     }
 
-    
-    public void actualizarBodega(){
-    
-      Bodegas bo = new Bodegas();
+    /**
+     * Metodo que edita una bodega setea los nuevos parametros y la edita
+     */
+    public void actualizarBodega() {
+
+        Bodegas bo = new Bodegas();
         bo.setId(id);
         bo.setCiudadesId(ciudadesEJB.buscar(idCiudades));
         bo.setDireccion(direccion);
@@ -133,31 +144,41 @@ public class BodegaManagedBean implements Serializable{
         System.out.println("ha actualizado correctamente");
         limpiar();
     }
-    
-     public void eliminarBodega(){
-    
-      Bodegas bo = bodegaEJB.buscar(id);
-    
+
+    /**
+     * Metodo que elimina la bodega
+     */
+    public void eliminarBodega() {
+
+        Bodegas bo = bodegaEJB.buscar(id);
+
 
         bodegaEJB.eliminar(bo);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha eliminado correctamente la bodega "));
-       // System.out.println("ha actualizado correctamente");
+
         limpiar();
     }
-     
-        private List<Bodegas> bodegas;
 
+    private List<Bodegas> bodegas;
+
+    /**
+     * Metodo que carga el listado de bodegas
+     *
+     * @return bodegas
+     */
     public List<Bodegas> getBodegas() {
-        bodegas= bodegaEJB.listarTodos();
+        bodegas = bodegaEJB.listarTodos();
         return bodegas;
     }
+
         
-        
-        
+      /**
+       * Metodo que limpia los campos
+       */  
     private void limpiar() {
 
         this.setId(0);
-      //  this.setIdCiudades(0);
+        //  this.setIdCiudades(0);
         this.setDireccion(null);
 
     }

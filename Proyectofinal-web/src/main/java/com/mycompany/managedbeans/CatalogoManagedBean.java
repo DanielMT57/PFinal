@@ -5,9 +5,8 @@
  */
 package com.mycompany.managedbeans;
 
-import com.mycompany.Bodegas;
 import com.mycompany.Catalogo;
-import com.mycompany.Productos;
+
 import com.mycompany.sessionbeans.CatalogoEJB;
 import java.io.Serializable;
 import java.util.Date;
@@ -29,6 +28,9 @@ import javax.inject.Named;
 
 public class CatalogoManagedBean implements Serializable {
 
+    /**
+     * atributos de la vista de catalogos
+     */
     private int id;
     private Date fechaInicio;
     private Date fechaFin;
@@ -36,7 +38,7 @@ public class CatalogoManagedBean implements Serializable {
     private int cantidadProductos;
 
     @EJB
-    private CatalogoEJB catalogoejb;
+    private CatalogoEJB catalogoejb; //instancio un objeto del ejb de catalogos
 
     /**
      * Creates a new instance of CatalogoManagedBean
@@ -83,6 +85,9 @@ public class CatalogoManagedBean implements Serializable {
         this.cantidadProductos = cantidadProductos;
     }
 
+    /**
+     * Metodo que crea el catalogo
+     */
     public void crearCatalogo() {
         Catalogo co = new Catalogo();
         co.setId(id);
@@ -90,7 +95,7 @@ public class CatalogoManagedBean implements Serializable {
         co.setFechafin(fechaFin);
         co.setCantidadpaginas(cantidadPaginas);
         co.setCantidadproductos(cantidadProductos);
-
+        // llamo el ejb de catalogo y lo persisto
         catalogoejb.crear(co);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha insertado correctamente el catalogo "));
         System.out.println("ha insertado correctamente");
@@ -98,10 +103,13 @@ public class CatalogoManagedBean implements Serializable {
 
     }
 
+    /**
+     * Metodo que busca el catalogo por su id
+     */
     public void buscarCatalogo() {
         Catalogo co = catalogoejb.buscar(id);
         if (co != null) {
-
+            // en caso no se ser null, seteo los nuevos valores
             fechaInicio = co.getFechainicio();
             fechaFin = co.getFechafin();
             cantidadPaginas = co.getCantidadpaginas();
@@ -113,12 +121,13 @@ public class CatalogoManagedBean implements Serializable {
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_ERROR, "Informacion", "No se encontro nada "));
         }
 
-        //   System.out.println("ha encontrado  correctamente");
-        //   limpiar ();
     }
 
+    /**
+     * Metodo que actualiza el catalogo
+     */
     public void actualizarCatalogo() {
-
+        // mando los nuevos valores y edito el objeto
         Catalogo co = new Catalogo();
         co.setId(id);
         co.setFechainicio(fechaInicio);
@@ -131,28 +140,36 @@ public class CatalogoManagedBean implements Serializable {
         System.out.println("ha actualizado correctamente");
         limpiar();
     }
-    
-    
-      public void eliminarCatalogo() {
 
-       Catalogo co = catalogoejb.buscar(id);
+    /**
+     * Metodo que elimina el catalogo
+     */
+    public void eliminarCatalogo() {
 
-       catalogoejb.eliminar(co);
+        Catalogo co = catalogoejb.buscar(id);
+
+        catalogoejb.eliminar(co);
         FacesContext.getCurrentInstance().addMessage(null, new FacesMessage(FacesMessage.SEVERITY_INFO, "Informacion", "Ha eliminado correctamente el Producto "));
-         System.out.println("ha eliminado correctamente");
+        System.out.println("ha eliminado correctamente");
         limpiar();
     }
-      
-      
-       private List<Catalogo> catalogos;
 
+    // declaro una nueva lista de catalogos
+    private List<Catalogo> catalogos;
+
+    /**
+     * Metodo que me lista los catalogos que existen en la base de datos
+     *
+     * @return catalogos
+     */
     public List<Catalogo> getCatalogos() {
-        catalogos =catalogoejb.listarTodos();
+        catalogos = catalogoejb.listarTodos();
         return catalogos;
     }
-       
-       
 
+    /**
+     * Metodo que limpia los campos luego de haber realizado una transaccion
+     */
     private void limpiar() {
         setId(0);
         setFechaInicio(null);
