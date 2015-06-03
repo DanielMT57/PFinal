@@ -11,7 +11,7 @@
     <h:body>
         <br/> 
         <h:link outcome="Principal" value="Volver"/>         
-        <h:form>            
+        <h:form id="form">            
             <p:messages id="messages" showDetail="true" autoUpdate="true" closable="true" />
             <p:panel header="Administracion de Pedidos">              
                 <h:panelGrid columns="4" cellpadding="3">
@@ -31,16 +31,25 @@
                     <p:inputText id="tfDescripcion"  value="#{pedidoManagedBean.descripcion}" />
                 </h:panelGrid> 
             </p:panel>
-
-            <p:panel header="Detalles del pedido ">       
+            <p:panelGrid columns="4">       
+                <p:row>
+                    <p:commandButton value="Insertar Pedido" actionListener="#{pedidoManagedBean.crearPedidos()}" ajax="false"/>
+                    <p:commandButton value="Buscar Pedido" actionListener="#{pedidoManagedBean.buscarPedido()}" ajax="false" />
+                    <p:commandButton value="Actualizar Pedido" actionListener="#{pedidoManagedBean.actualizarPedido()}" ajax="false" />
+                </p:row>
+            </p:panelGrid> 
+            <p:panel header="Detalles del pedido " id ="PanelPedidos">       
                 <h:panelGrid columns="2" cellpadding="3">
 
                     <p:outputLabel>Producto</p:outputLabel>
                     <p:selectOneMenu value="#{pedidoManagedBean.idProducto}" id="cbxIdProducto" style="width:75%" >
                         <f:selectItems value="#{pedidoManagedBean.productos}" var="pro" itemValue="${pro.id}" itemLabel="${pro.descripcion}" />
-                        <p:ajax update="@form" listener="#{pedidoManagedBean.actualizar()}"/>
+                        <p:ajax update=":form:PanelPedidos" listener="#{pedidoManagedBean.actualizar()}"/>
+                    </p:selectOneMenu> 
+                    <p:outputLabel>Pedido</p:outputLabel>
+                    <p:selectOneMenu value="#{pedidoManagedBean.idPedidoList}" id="cbxIdPedido" style="width:75%" >
+                        <f:selectItems value="#{pedidoManagedBean.pedidos}" var="ped" itemValue="${ped.id}" itemLabel="${ped.id}" />
                     </p:selectOneMenu>  
-
                     <p:outputLabel>Cantidad</p:outputLabel>
                     <p:inputText id="tfCantidad" required="true" value="#{pedidoManagedBean.cantidad}" />
 
@@ -52,7 +61,7 @@
             </p:panel>       
             <p:panelGrid columns="4">       
                 <p:row>
-                    <p:commandButton value="Insertar" actionListener="#{pedidoManagedBean.crearPedidos()}" ajax="false"/>
+                    <p:commandButton value="Insertar DetallePedido" actionListener="#{pedidoManagedBean.crearDetallePedido()}" ajax="false"/>
                     <p:commandButton value="Buscar" actionListener="#{pedidoManagedBean.buscarPedido()}" ajax="false" />
                     <p:commandButton value="Actualizar" actionListener="#{pedidoManagedBean.actualizarPedido()}" ajax="false" />
                 </p:row>

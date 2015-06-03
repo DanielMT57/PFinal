@@ -36,11 +36,9 @@ import org.eclipse.persistence.annotations.ClassExtractor;
 @XmlRootElement(name = "pedidos")
 @Entity
 @Table(name = "Pedidos")
-@NamedQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  p From Pedidos p")
+@NamedQuery(name = Pedidos.CONSULTA_LISTARTODOS, query = "SELECT  p From Pedidos p where p.estadoId.id=1")
 public class Pedidos implements Serializable {
     public static final String CONSULTA_LISTARTODOS = "Pedidos.listartodos";
-    
-    
     @Id
     @Column(name = "Id")
     private int id;
